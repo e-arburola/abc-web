@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Bytes &amp; Consulting | Contador Privado Incorporado en Costa Rica</title>
+<meta name="description" content="Contabilidad, asesoría fiscal y planillas en San José, Costa Rica. Eduardo Bermúdez Arburola, CPI N.º 35066.">
+<style>
+:root{
+  --ground:#F6F4EF; --ink:#16201C; --ink-2:#4A5650; --field:#1D3C34; --field-ink:#F6F4EF;
+  --gold:#A9823A; --gold-soft:#C5A358; --warm:#E4DED5; --line-tone:#ECE8E0;
+  --font-display:"Georgia","Times New Roman",serif;
+  --font-text:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --gutter:clamp(20px,5vw,72px);
+}
+[data-theme="dark"]{
+  --ground:#101815; --ink:#EEEAE2; --ink-2:#B7BFB9; --field:#0A1310; --field-ink:#EEEAE2;
+  --gold:#C5A358; --gold-soft:#D9B977; --warm:#1A2622; --line-tone:#16211D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font-family:var(--font-text);font-size:17px;line-height:1.6}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{padding-inline:var(--gutter)}
+h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:-.02em;line-height:1}
+h1{font-size:clamp(44px,7.4vw,118px)}
+h2{font-size:clamp(38px,5.4vw,84px)}
+h3{font-size:clamp(24px,2.4vw,34px);line-height:1.15;letter-spacing:-.01em}
+p{max-width:58ch}
+.lead{font-size:clamp(19px,1.6vw,23px);color:var(--ink-2)}
+.btn{display:inline-block;padding:16px 26px;font:inherit;font-weight:600;text-decoration:none;border:0;cursor:pointer;background:var(--gold);color:#101815;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:var(--gold-soft)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--ground)}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:var(--ground);display:flex;align-items:center;justify-content:space-between;padding-block:14px;padding-inline:var(--gutter)}
+.brand img{height:72px;width:auto}
+nav{display:flex;gap:28px;align-items:center}
+nav a{text-decoration:none;font-size:15px;color:var(--ink-2)}
+nav a:hover{color:var(--ink)}
+.tools{display:flex;gap:10px;align-items:center}
+.tool{font:inherit;font-size:14px;background:none;border:2px solid var(--ink);color:var(--ink);padding:8px 12px;cursor:pointer}
+
+/* hero: type first, picture carousel large */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(32px,5vw,80px);align-items:end;padding-block:clamp(56px,9vw,140px)}
+.hero .lead{margin-top:32px}
+.hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
+.slides{position:relative;aspect-ratio:4/5;background:var(--warm);overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s;display:flex;align-items:flex-end;padding:24px;background:var(--field);color:var(--field-ink)}
+.slide.on{opacity:1}
+.slide span{font-size:14px;letter-spacing:.02em}
+.dots{display:flex;gap:8px;margin-top:14px}
+.dots button{width:28px;height:4px;border:0;background:var(--ink-2);opacity:.4;cursor:pointer}
+.dots button[aria-current="true"]{opacity:1;background:var(--gold)}
+
+/* services: large-type list, no cards */
+.services{padding-block:clamp(80px,10vw,160px)}
+.services-head{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap;margin-bottom:clamp(48px,6vw,96px)}
+.svc-list{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(40px,6vw,120px);row-gap:clamp(48px,6vw,88px)}
+.svc h3{margin-bottom:14px}
+.svc p{color:var(--ink-2)}
+
+/* process: full colour field */
+.process{background:var(--field);color:var(--field-ink);padding-block:clamp(90px,11vw,170px)}
+.process h2{max-width:14ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,64px);margin-top:clamp(56px,7vw,110px)}
+.steps p{color:color-mix(in srgb,var(--field-ink) 78%,transparent);margin-top:16px}
+.steps h3{color:var(--field-ink)}
+
+/* who */
+.who{padding-block:clamp(80px,10vw,150px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,110px);align-items:start}
+.who ul{list-style:none;display:grid;gap:0}
+.who li{font-family:var(--font-display);font-size:clamp(28px,3.2vw,48px);line-height:1.1;padding-block:22px;background:var(--line-tone)}
+.who li + li{margin-top:10px}
+.who li{padding-inline:24px}
+
+/* about */
+.about{background:var(--warm);padding-block:clamp(90px,11vw,170px)}
+.about-grid{display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:clamp(40px,6vw,120px);align-items:start}
+.portrait{aspect-ratio:4/5;background:var(--field);color:var(--field-ink);display:flex;align-items:flex-end;padding:24px;font-family:var(--font-display);font-size:clamp(56px,6vw,96px);line-height:1}
+.about .sig{margin-top:32px;font-weight:600}
+.about .sig small{display:block;font-weight:400;color:var(--ink-2)}
+.about p + p{margin-top:18px}
+.creds{margin-top:36px;font-size:16px;color:var(--ink-2)}
+.creds a{color:var(--ink)}
+
+/* faq */
+.faq{padding-block:clamp(80px,10vw,150px)}
+details{padding:26px 28px;background:var(--line-tone);max-width:900px;margin-bottom:12px}
+details summary{font-family:var(--font-display);font-size:clamp(24px,2.4vw,34px);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:24px}
+details summary::after{content:"+";font-family:var(--font-text);font-size:28px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:16px;color:var(--ink-2)}
+
+/* contact */
+.contact{padding-block:clamp(90px,11vw,170px);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,6vw,120px)}
+.contact h2{margin-bottom:28px}
+form{display:grid;gap:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+label{display:grid;gap:8px;font-size:16px;font-weight:600}
+input,select,textarea{font:inherit;font-size:17px;font-weight:400;padding:14px 16px;background:var(--ground);color:var(--ink);border:2px solid var(--ink-2);border-radius:0;width:100%}
+textarea{min-height:130px;resize:vertical}
+.check{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:16px}
+.check input{width:22px;height:22px;flex:0 0 22px;margin-top:2px}
+.hp{position:absolute;left:-9999px}
+.msg{font-weight:600;min-height:1.6em}
+.fine{font-size:14px;color:var(--ink-2)}
+.fine a{color:var(--ink)}
+
+/* footer */
+footer{background:var(--field);color:var(--field-ink);padding:clamp(60px,7vw,100px) var(--gutter) 32px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;align-items:start}
+.foot .mark{font-family:var(--font-display);font-size:clamp(40px,5vw,72px);line-height:1;color:var(--gold-soft)}
+.foot a{color:var(--field-ink)}
+.foot p{color:color-mix(in srgb,var(--field-ink) 80%,transparent)}
+.legal{margin-top:56px;padding-top:24px;font-size:14px;display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;color:color-mix(in srgb,var(--field-ink) 70%,transparent)}
+.wa{position:fixed;right:20px;bottom:20px;z-index:30;background:var(--gold);color:#101815;padding:14px 20px;font-weight:700;text-decoration:none}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hero,.who,.about-grid,.contact{grid-template-columns:1fr}
+  .svc-list{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .brand img{height:64px}
+  .slides{aspect-ratio:4/3}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="#inicio" aria-label="Accounting Bytes &amp; Consulting, inicio"><img src="../assets/logo-recortado.svg" alt="Accounting Bytes &amp; Consulting"></a>
+  <nav aria-label="Principal">
+    <a href="#servicios" data-i="nav_servicios">Servicios</a>
+    <a href="#proceso" data-i="nav_proceso">Cómo trabajamos</a>
+    <a href="#nosotros" data-i="nav_nosotros">Nosotros</a>
+    <a href="#preguntas" data-i="nav_faq">Preguntas</a>
+    <a href="#contacto" data-i="nav_contacto">Contacto</a>
+  </nav>
+  <div class="tools">
+    <button class="tool" id="lang" aria-label="Change language">English</button>
+    <button class="tool" id="theme" aria-label="Toggle dark mode">Oscuro</button>
+  </div>
+</header>
+
+<main id="inicio">
+
+<section class="wrap hero">
+  <div>
+    <h1 data-i="h1">Contabilidad clara para decidir con tranquilidad.</h1>
+    <p class="lead" data-i="hero_lead">Llevamos tu contabilidad y te acompañamos con tus obligaciones tributarias en Costa Rica, para que cumplas a tiempo y sepas en qué punto estás.</p>
+    <div class="actions">
+      <a class="btn" href="#contacto" data-i="btn_info">Solicitar información</a>
+      <a class="btn btn-ghost" href="#servicios" data-i="btn_servicios">Ver servicios</a>
+    </div>
+  </div>
+  <div>
+    <div class="slides" id="slides" role="region" aria-roledescription="carrusel" aria-label="Valle Central, Costa Rica">
+      <div class="slide on"><span>Valle Central, Costa Rica · foto pendiente</span></div>
+      <div class="slide"><span>Valle Central, Costa Rica · foto pendiente</span></div>
+      <div class="slide"><span>Valle Central, Costa Rica · foto pendiente</span></div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<section class="wrap services" id="servicios">
+  <div class="services-head">
+    <h2 data-i="h_servicios">Servicios de contabilidad</h2>
+    <p class="lead" data-i="svc_intro">Para personas físicas, trabajadores independientes, PYMES y empresas nacionales.</p>
+  </div>
+  <div class="svc-list">
+    <article class="svc"><h3 data-i="s1_t">Contabilidad general</h3><p data-i="s1_p">Registro de operaciones, conciliaciones y estados financieros al día.</p></article>
+    <article class="svc"><h3 data-i="s2_t">Asesoría fiscal</h3><p data-i="s2_p">Declaraciones de renta e IVA, plazos y orientación para cumplir con Hacienda y reducir el riesgo de multas.</p></article>
+    <article class="svc"><h3 data-i="s3_t">Planillas y cargas sociales</h3><p data-i="s3_p">Cálculo de planillas y reportes ante la CCSS y el INS.</p></article>
+    <article class="svc"><h3 data-i="s4_t">Contabilidad gerencial</h3><p data-i="s4_p">Información para decidir: costos, presupuestos y flujo de efectivo.</p></article>
+    <article class="svc"><h3 data-i="s5_t">Capacitación</h3><p data-i="s5_p">Talleres sobre obligaciones fiscales y buenas prácticas contables para tu equipo.</p></article>
+    <article class="svc"><h3 data-i="s6_t">Apoyo a independientes</h3><p data-i="s6_p">Acompañamiento para personas con actividad económica y emprendedores.</p></article>
+  </div>
+</section>
+
+<section class="process" id="proceso">
+  <div class="wrap">
+    <h2 data-i="h_proceso">Cómo trabajamos</h2>
+    <div class="steps">
+      <div><h3 data-i="p1_t">Diagnóstico inicial</h3><p data-i="p1_p">Revisamos tu situación contable y la documentación disponible.</p></div>
+      <div><h3 data-i="p2_t">Propuesta por escrito</h3><p data-i="p2_p">Alcance, periodicidad y forma de trabajo, explicados antes de empezar.</p></div>
+      <div><h3 data-i="p3_t">Ejecución y seguimiento</h3><p data-i="p3_p">Registros, declaraciones y reportes con revisión continua.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap who" aria-labelledby="h_para">
+  <h2 id="h_para" data-i="h_para">Para quién trabajamos</h2>
+  <ul>
+    <li data-i="w1">Trabajadores independientes</li>
+    <li data-i="w2">Personas físicas con actividad económica</li>
+    <li data-i="w3">PYMES</li>
+    <li data-i="w4">Empresas nacionales</li>
+  </ul>
+</section>
+
+<section class="about" id="nosotros">
+  <div class="wrap about-grid">
+    <div class="portrait" role="img" aria-label="Foto de Eduardo Bermúdez Arburola (pendiente)">EB</div>
+    <div>
+      <h2 data-i="h_nos">Eduardo Bermúdez Arburola</h2>
+      <p class="sig">Contador Privado Incorporado (CPI)<small>CPI N.º 35066 · <span data-i="since">Ejerciendo de forma independiente desde 2018</span></small></p>
+      <p data-i="bio1">Preparación y presentación de documentos tributarios, estados financieros y ajustes contables, con seguimiento de la normativa vigente.</p>
+      <p data-i="bio2">Experiencia en planillas y reportes ante la CCSS y el INS, control de inventarios, flujo de efectivo y compras.</p>
+      <p data-i="bio3">Manejo de Excel avanzado, SAP Business One, Odoo, Microsoft Dynamics y otros sistemas contables.</p>
+      <p class="creds" data-i="resp">Responsable: <a href="mailto:edu.bermudez@abc.cr">edu.bermudez@abc.cr</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap faq" id="preguntas">
+  <h2 data-i="h_faq">Preguntas frecuentes</h2>
+  <div style="margin-top:56px">
+    <details><summary data-i="q1">¿Qué necesito para empezar?</summary><p data-i="a1">Tu cédula, los documentos de respaldo de ingresos y gastos, y acceso a tus facturas electrónicas.</p></details>
+    <details><summary data-i="q2">¿Cuánto cuesta?</summary><p data-i="a2">Los honorarios se cotizan según el alcance del servicio y se basan en los aranceles del Colegio de Contadores Privados de Costa Rica.</p></details>
+    <details><summary data-i="q3">¿Hacen auditoría?</summary><p data-i="a3">No. Nuestros servicios son de contabilidad privada.</p></details>
+    <details><summary data-i="q4">¿Dónde están?</summary><p data-i="a4">San José, San Sebastián, Paso Ancho. Atendemos de lunes a viernes, de 9:00 a. m. a 4:30 p. m.</p></details>
+  </div>
+</section>
+
+<section class="contact wrap" id="contacto">
+  <div>
+    <h2 data-i="h_contacto">Hablemos de tu contabilidad</h2>
+    <p class="lead" data-i="contact_lead">Cuéntanos qué necesitas y te respondemos en el horario de atención.</p>
+    <p class="creds">Tel. / WhatsApp: <a href="tel:+50684141438">8414-1438</a></p>
+    <p class="creds"><a href="https://wa.me/50684141438" data-i="wa_link">Escribir por WhatsApp</a></p>
+  </div>
+  <form id="form" novalidate>
+    <input type="hidden" name="access_key" value="3da531ae-766d-451e-be30-8b39a322fe1f">
+    <input type="hidden" name="subject" value="Nueva solicitud desde abc.cr">
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+    <div class="row">
+      <label><span data-i="f_nombre">Nombre completo *</span><input name="name" required autocomplete="name"></label>
+      <label><span data-i="f_tel">Teléfono o WhatsApp *</span><input name="phone" required autocomplete="tel"></label>
+    </div>
+    <label><span data-i="f_email">Correo electrónico</span><input name="email" type="email" autocomplete="email"></label>
+    <label><span data-i="f_servicio">Servicio de interés</span>
+      <select name="servicio">
+        <option value="contabilidad" data-i="s1_t">Contabilidad general</option>
+        <option value="fiscal" data-i="s2_t">Asesoría fiscal</option>
+        <option value="planillas" data-i="s3_t">Planillas y cargas sociales</option>
+        <option value="gerencial" data-i="s4_t">Contabilidad gerencial</option>
+        <option value="capacitacion" data-i="s5_t">Capacitación</option>
+        <option value="otro" data-i="otro">Otro</option>
+      </select>
+    </label>
+    <label><span data-i="f_msg">Mensaje</span><textarea name="message"></textarea></label>
+    <label class="check"><input type="checkbox" name="consent" required><span data-i="consent">Acepto el tratamiento de mis datos para responder esta solicitud, según la <a href="#privacidad">política de privacidad</a>.</span></label>
+    <button class="btn" type="submit" data-i="btn_enviar">Enviar solicitud</button>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </form>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <p class="mark">Accounting Bytes &amp; Consulting</p>
+      <p data-i="foot_desc">Contador Privado Incorporado · CPI N.º 35066</p>
+    </div>
+    <div>
+      <p data-i="foot_contact">Contacto</p>
+      <p><a href="mailto:asistente@abc.cr">asistente@abc.cr</a></p>
+      <p><a href="tel:+50684141438">8414-1438</a></p>
+      <p data-i="foot_hours">Lunes a viernes, 9:00 a. m. a 4:30 p. m.</p>
+    </div>
+    <div>
+      <p data-i="foot_loc">San José, San Sebastián, Paso Ancho</p>
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 Accounting Bytes &amp; Consulting. <span data-i="rights">Todos los derechos reservados.</span></span>
+    <span><a href="#aviso" data-i="aviso">Aviso legal</a> · <a href="#privacidad" id="privacidad" data-i="privacidad">Política de privacidad</a></span>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/50684141438" data-i="wa_float">WhatsApp</a>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "cf141327b8b046709b19620f1fc019a9"}'></script>
+<script>
+const T = {
+ es:{ nav_servicios:"Servicios",nav_proceso:"Cómo trabajamos",nav_nosotros:"Nosotros",nav_faq:"Preguntas",nav_contacto:"Contacto",
+  h1:"Contabilidad clara para decidir con tranquilidad.",
+  hero_lead:"Llevamos tu contabilidad y te acompañamos con tus obligaciones tributarias en Costa Rica, para que cumplas a tiempo y sepas en qué punto estás.",
+  btn_info:"Solicitar información",btn_servicios:"Ver servicios",h_servicios:"Servicios de contabilidad",
+  svc_intro:"Para personas físicas, trabajadores independientes, PYMES y empresas nacionales.",
+  s1_t:"Contabilidad general",s1_p:"Registro de operaciones, conciliaciones y estados financieros al día.",
+  s2_t:"Asesoría fiscal",s2_p:"Declaraciones de renta e IVA, plazos y orientación para cumplir con Hacienda y reducir el riesgo de multas.",
+  s3_t:"Planillas y cargas sociales",s3_p:"Cálculo de planillas y reportes ante la CCSS y el INS.",
+  s4_t:"Contabilidad gerencial",s4_p:"Información para decidir: costos, presupuestos y flujo de efectivo.",
+  s5_t:"Capacitación",s5_p:"Talleres sobre obligaciones fiscales y buenas prácticas contables para tu equipo.",
+  s6_t:"Apoyo a independientes",s6_p:"Acompañamiento para personas con actividad económica y emprendedores.",
+  h_proceso:"Cómo trabajamos",p1_t:"Diagnóstico inicial",p1_p:"Revisamos tu situación contable y la documentación disponible.",
+  p2_t:"Propuesta por escrito",p2_p:"Alcance, periodicidad y forma de trabajo, explicados antes de empezar.",
+  p3_t:"Ejecución y seguimiento",p3_p:"Registros, declaraciones y reportes con revisión continua.",
+  h_para:"Para quién trabajamos",w1:"Trabajadores independientes",w2:"Personas físicas con actividad económica",w3:"PYMES",w4:"Empresas nacionales",
+  h_nos:"Eduardo Bermúdez Arburola",since:"Ejerciendo de forma independiente desde 2018",
+  bio1:"Preparación y presentación de documentos tributarios, estados financieros y ajustes contables, con seguimiento de la normativa vigente.",
+  bio2:"Experiencia en planillas y reportes ante la CCSS y el INS, control de inventarios, flujo de efectivo y compras.",
+  bio3:"Manejo de Excel avanzado, SAP Business One, Odoo, Microsoft Dynamics y otros sistemas contables.",
+  resp:"Responsable: ",h_faq:"Preguntas frecuentes",
+  q1:"¿Qué necesito para empezar?",a1:"Tu cédula, los documentos de respaldo de ingresos y gastos, y acceso a tus facturas electrónicas.",
+  q2:"¿Cuánto cuesta?",a2:"Los honorarios se cotizan según el alcance del servicio y se basan en los aranceles del Colegio de Contadores Privados de Costa Rica.",
+  q3:"¿Hacen auditoría?",a3:"No. Nuestros servicios son de contabilidad privada.",
+  q4:"¿Dónde están?",a4:"San José, San Sebastián, Paso Ancho. Atendemos de lunes a viernes, de 9:00 a. m. a 4:30 p. m.",
+  h_contacto:"Hablemos de tu contabilidad",contact_lead:"Cuéntanos qué necesitas y te respondemos en el horario de atención.",
+  wa_link:"Escribir por WhatsApp",f_nombre:"Nombre completo *",f_tel:"Teléfono o WhatsApp *",f_email:"Correo electrónico",
+  f_servicio:"Servicio de interés",otro:"Otro",f_msg:"Mensaje",
+  consent:"Acepto el tratamiento de mis datos para responder esta solicitud, según la política de privacidad.",
+  btn_enviar:"Enviar solicitud",ok:"Gracias. Recibimos tu solicitud y te responderemos en el horario de atención.",
+  err:"No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.",req:"Completa los campos obligatorios.",
+  wa_float:"WhatsApp",foot_desc:"Contador Privado Incorporado · CPI N.º 35066",foot_contact:"Contacto",
+  foot_hours:"Lunes a viernes, 9:00 a. m. a 4:30 p. m.",foot_loc:"San José, San Sebastián, Paso Ancho",
+  rights:"Todos los derechos reservados.",aviso:"Aviso legal",privacidad:"Política de privacidad",
+  lang_btn:"English",theme_btn:"Oscuro"
+ },
+ en:{ nav_servicios:"Services",nav_proceso:"How we work",nav_nosotros:"About",nav_faq:"FAQ",nav_contacto:"Contact",
+  h1:"Clear accounting for confident decisions.",
+  hero_lead:"We keep your books and guide you through your tax obligations in Costa Rica, so you file on time and know where you stand.",
+  btn_info:"Request information",btn_servicios:"View services",h_servicios:"Accounting services",
+  svc_intro:"For individuals, self-employed professionals, SMEs and national companies.",
+  s1_t:"General accounting",s1_p:"Recording of transactions, reconciliations and up-to-date financial statements.",
+  s2_t:"Tax advisory",s2_p:"Income and VAT filings, deadlines and guidance to meet tax obligations and reduce the risk of fines.",
+  s3_t:"Payroll and social contributions",s3_p:"Payroll calculation and reports to the CCSS and INS.",
+  s4_t:"Management accounting",s4_p:"Information for decisions: costs, budgets and cash flow.",
+  s5_t:"Training",s5_p:"Workshops on tax obligations and good accounting practice for your team.",
+  s6_t:"Support for self-employed",s6_p:"Support for self-employed people and entrepreneurs.",
+  h_proceso:"How we work",p1_t:"Initial review",p1_p:"We review your accounting situation and the documents available.",
+  p2_t:"Written proposal",p2_p:"Scope, frequency and way of working, explained before we start.",
+  p3_t:"Execution and follow-up",p3_p:"Records, filings and reports with ongoing review.",
+  h_para:"Who we work with",w1:"Self-employed professionals",w2:"Individuals with business activity",w3:"SMEs",w4:"National companies",
+  h_nos:"Eduardo Bermúdez Arburola",since:"Independent practice since 2018",
+  bio1:"Preparation and filing of tax documents, financial statements and accounting adjustments, following current regulations.",
+  bio2:"Experience with payroll and reports to the CCSS and INS, inventory control, cash flow and purchasing.",
+  bio3:"Advanced Excel, SAP Business One, Odoo, Microsoft Dynamics and other accounting systems.",
+  resp:"Contact: ",h_faq:"Frequently asked questions",
+  q1:"What do I need to start?",a1:"Your ID, supporting documents for income and expenses, and access to your electronic invoices.",
+  q2:"How much does it cost?",a2:"Fees are quoted according to the scope of the service and are based on the fee schedule of the Colegio de Contadores Privados de Costa Rica.",
+  q3:"Do you do audits?",a3:"No. Our services are private accounting services.",
+  q4:"Where are you?",a4:"San José, San Sebastián, Paso Ancho. Open Monday to Friday, 9:00 a.m. to 4:30 p.m.",
+  h_contacto:"Let's talk about your accounting",contact_lead:"Tell us what you need and we will reply during business hours.",
+  wa_link:"Message on WhatsApp",f_nombre:"Full name *",f_tel:"Phone or WhatsApp *",f_email:"Email",
+  f_servicio:"Service of interest",otro:"Other",f_msg:"Message",
+  consent:"I accept the processing of my data to answer this request, under the privacy policy.",
+  btn_enviar:"Send request",ok:"Thank you. We received your request and will reply during business hours.",
+  err:"We could not send your request. Please try again or message us on WhatsApp.",req:"Please complete the required fields.",
+  wa_float:"WhatsApp",foot_desc:"Contador Privado Incorporado · CPI No. 35066",foot_contact:"Contact",
+  foot_hours:"Monday to Friday, 9:00 a.m. to 4:30 p.m.",foot_loc:"San José, San Sebastián, Paso Ancho",
+  rights:"All rights reserved.",aviso:"Legal notice",privacidad:"Privacy policy",
+  lang_btn:"Español",theme_btn:"Dark"
+ }
+};
+let lang = "es";
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el=>{ const k=el.dataset.i; if(T[lang][k]!==undefined){ if(k==="resp"){ el.firstChild.textContent=T[lang][k]; } else el.textContent = T[lang][k]; } });
+  document.getElementById("lang").textContent = T[lang].lang_btn;
+  document.getElementById("theme").textContent = document.documentElement.dataset.theme==="dark" ? (lang==="es"?"Claro":"Light") : T[lang].theme_btn;
+  try{ localStorage.setItem("abc-lang",lang); }catch(e){}
+}
+document.getElementById("lang").onclick=()=>{ lang = lang==="es"?"en":"es"; applyLang(); };
+document.getElementById("theme").onclick=()=>{ const d=document.documentElement; d.dataset.theme = d.dataset.theme==="dark"?"light":"dark"; applyLang(); try{ localStorage.setItem("abc-theme",d.dataset.theme); }catch(e){} };
+try{
+  const sl=localStorage.getItem("abc-lang"); if(sl) lang=sl;
+  const st=localStorage.getItem("abc-theme"); if(st) document.documentElement.dataset.theme=st;
+  else if(matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme="dark";
+}catch(e){}
+applyLang();
+
+// carrusel
+const slides=[...document.querySelectorAll(".slide")], dots=document.getElementById("dots"); let idx=0;
+slides.forEach((s,i)=>{ const b=document.createElement("button"); b.setAttribute("aria-label","Imagen "+(i+1)); b.onclick=()=>show(i); dots.appendChild(b); });
+function show(i){ idx=i; slides.forEach((s,j)=>s.classList.toggle("on",j===i)); [...dots.children].forEach((d,j)=>d.setAttribute("aria-current",j===i)); }
+show(0);
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(()=>show((idx+1)%slides.length),6000);
+
+// formulario Web3Forms
+const form=document.getElementById("form"), msg=document.getElementById("msg");
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  if(!form.checkValidity()){ form.reportValidity(); msg.textContent=T[lang].req; return; }
+  msg.textContent="…";
+  try{
+    const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:new FormData(form)});
+    const j=await r.json();
+    if(j.success){ form.reset(); msg.textContent=T[lang].ok; } else msg.textContent=T[lang].err;
+  }catch(err){ msg.textContent=T[lang].err; }
+});
+</script>
+</body>
+</html>
