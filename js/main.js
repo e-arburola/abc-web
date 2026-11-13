@@ -84,7 +84,6 @@ document.getElementById("theme").onclick=()=>{ const d=document.documentElement;
 try{
   const sl=localStorage.getItem("abc-lang"); if(sl) lang=sl;
   const st=localStorage.getItem("abc-theme"); if(st) document.documentElement.dataset.theme=st;
-  else if(matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.dataset.theme="dark";
 }catch(e){}
 applyLang();
 
