@@ -29,7 +29,7 @@ const T = {
   consent:"Acepto el tratamiento de mis datos para responder esta solicitud, según la política de privacidad.",
   btn_enviar:"Enviar solicitud",ok:"Gracias. Recibimos tu solicitud y te responderemos en el horario de atención.",
   err:"No pudimos enviar la solicitud. Intenta de nuevo o escríbenos por WhatsApp.",req:"Completa los campos obligatorios.",
-  wa_float:"WhatsApp",foot_desc:"Contador Privado Incorporado · CPI N.º 35066",foot_contact:"Contacto",foot_hours_t:"Horario",
+  wa_float:"WhatsApp",tel_label:"Teléfono & WhatsApp:",foot_desc:"Contador Privado Incorporado · CPI N.º 35066",foot_contact:"Contacto",foot_hours_t:"Horario",
   foot_hours:"Lunes a viernes, 9:00 a. m. a 4:30 p. m.",foot_loc:"San José, San Sebastián, Paso Ancho",
   rights:"Todos los derechos reservados.",aviso:"Aviso legal",privacidad:"Política de privacidad",
   lang_btn:"English",theme_btn:"Oscuro"
@@ -64,7 +64,7 @@ const T = {
   consent:"I accept the processing of my data to answer this request, under the privacy policy.",
   btn_enviar:"Send request",ok:"Thank you. We received your request and will reply during business hours.",
   err:"We could not send your request. Please try again or message us on WhatsApp.",req:"Please complete the required fields.",
-  wa_float:"WhatsApp",foot_desc:"Contador Privado Incorporado · CPI No. 35066",foot_contact:"Contact",foot_hours_t:"Hours",
+  wa_float:"WhatsApp",tel_label:"Phone & WhatsApp:",foot_desc:"Contador Privado Incorporado · CPI No. 35066",foot_contact:"Contact",foot_hours_t:"Hours",
   foot_hours:"Monday to Friday, 9:00 a.m. to 4:30 p.m.",foot_loc:"San José, San Sebastián, Paso Ancho",
   rights:"All rights reserved.",aviso:"Legal notice",privacidad:"Privacy policy",
   lang_btn:"Español",theme_btn:"Dark"

@@ -126,6 +126,6 @@ footer{background:var(--green);color:#E9ECE8;padding:56px 0 28px}
 main > section.contact{padding-top:72px}
 
 body.watermark{position:relative;isolation:isolate}
-body.watermark::before{content:"";position:fixed;inset:0;z-index:-1;background:url("../img/logo-recortado.svg") center / min(90vw,980px) no-repeat;opacity:.07;pointer-events:none}
+body.watermark::before{content:"";position:fixed;inset:0;z-index:-1;background:url("../img/logo-recortado.svg") center / min(90vw,980px) no-repeat;opacity:.12;pointer-events:none}
 
 body.watermark .contact,body.watermark .page-head{background:transparent}
