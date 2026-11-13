@@ -99,7 +99,7 @@ footer{background:var(--green);color:#E9ECE8;padding:56px 0 28px}
 .foot h3{color:#fff;font-size:16px}
 .foot p{color:#C9D2CD;font-size:15px}
 .legal{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#C9D2CD}
-.wa{position:fixed;right:18px;bottom:18px;z-index:30;min-height:52px;padding:12px 20px;border-radius:999px;background:var(--green);color:#F4F1EA;font-weight:700;text-decoration:none;border:2px solid var(--gold)}
+.wa{position:fixed;right:18px;bottom:18px;z-index:30;min-height:52px;padding:12px 20px;border-radius:999px;background:var(--green);color:#F4F1EA;font-weight:700;text-decoration:none;border:0}
 
 @media (max-width:920px){
   nav.menu{display:none}
