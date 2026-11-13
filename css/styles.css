@@ -6,7 +6,7 @@
   --serif:"Georgia","Times New Roman",serif;
 }
 [data-theme="dark"]{
-  --bg:#0F1714; --bg-2:#16221E; --text:#EDEAE3; --text-2:#B9C0BB; --border:#2A3834; --green:#2B5A4A; --green-2:#3A6F5C;
+  --bg:#0F1714; --bg-2:#16221E; --text:#EDEAE3; --text-2:#B9C0BB; --border:#2A3834; --green:#0B1B16; --green-2:#17302A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -135,3 +135,5 @@ body.watermark .contact,body.watermark .page-head{background:transparent}
 .legal-sec{margin-top:48px}
 .legal-sec h2{font-size:clamp(24px,2.6vw,32px);margin-bottom:14px}
 .legal-sec p{margin-top:12px;color:var(--text);max-width:none}
+
+[data-theme="dark"] .hero{background:#326A5A}
