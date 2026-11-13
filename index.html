@@ -11,13 +11,13 @@
 
 <header>
   <div class="container bar">
-    <a class="brand" href="#inicio" aria-label="Accounting Bytes &amp; Consulting, inicio"><img src="img/logo-recortado.svg" alt="Accounting Bytes &amp; Consulting"></a>
+    <a class="brand" href="index.html" aria-label="Accounting Bytes &amp; Consulting, inicio"><img src="img/logo-recortado.svg" alt="Accounting Bytes &amp; Consulting"></a>
     <nav class="menu" aria-label="Principal">
-      <a href="#servicios" data-i="nav_servicios">Servicios</a>
-      <a href="#proceso" data-i="nav_proceso">Cómo trabajamos</a>
-      <a href="#nosotros" data-i="nav_nosotros">Nosotros</a>
-      <a href="#preguntas" data-i="nav_faq">Preguntas</a>
-      <a href="#contacto" data-i="nav_contacto">Contacto</a>
+      <a href="servicios.html" data-i="nav_servicios">Servicios</a>
+      <a href="index.html#proceso" data-i="nav_proceso">Cómo trabajamos</a>
+      <a href="index.html#nosotros" data-i="nav_nosotros">Nosotros</a>
+      <a href="index.html#preguntas" data-i="nav_faq">Preguntas</a>
+      <a href="contacto.html" data-i="nav_contacto">Contacto</a>
     </nav>
     <div class="tools">
       <button class="tool" id="lang" aria-label="Change language">English</button>
@@ -31,11 +31,11 @@
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <h1 data-i="h1">Contabilidad clara para decidir con tranquilidad</h1>
+      <h1 data-i="h1">Contabilidad transparente para decidir con tranquilidad</h1>
       <p class="lead" data-i="hero_lead">Llevamos tu contabilidad y te acompañamos con tus obligaciones tributarias en Costa Rica, para que cumplas a tiempo y sepas en qué punto estás.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#contacto" data-i="btn_info">Solicitar información</a>
-        <a class="btn btn-outline" href="#servicios" data-i="btn_servicios">Ver servicios</a>
+        <a class="btn btn-primary" href="contacto.html" data-i="btn_info">Solicitar información</a>
+        <a class="btn btn-outline" href="servicios.html" data-i="btn_servicios">Ver servicios</a>
       </div>
     </div>
     <div>
@@ -49,20 +49,7 @@
   </div>
 </section>
 
-<section class="services" id="servicios">
-  <div class="container">
-    <h2 data-i="h_servicios">Servicios de contabilidad</h2>
-    <p class="lead" data-i="svc_intro">Para personas físicas, trabajadores independientes, PYMES y empresas nacionales.</p>
-    <div class="grid3">
-      <article class="card"><h3 data-i="s1_t">Contabilidad general</h3><p data-i="s1_p">Registro de operaciones, conciliaciones y estados financieros al día.</p></article>
-      <article class="card"><h3 data-i="s2_t">Asesoría fiscal</h3><p data-i="s2_p">Declaraciones de renta e IVA, plazos y orientación para cumplir con Hacienda y reducir el riesgo de multas.</p></article>
-      <article class="card"><h3 data-i="s3_t">Planillas y cargas sociales</h3><p data-i="s3_p">Cálculo de planillas y reportes ante la CCSS y el INS.</p></article>
-      <article class="card"><h3 data-i="s4_t">Contabilidad gerencial</h3><p data-i="s4_p">Información para decidir: costos, presupuestos y flujo de efectivo.</p></article>
-      <article class="card"><h3 data-i="s5_t">Capacitación</h3><p data-i="s5_p">Talleres sobre obligaciones fiscales y buenas prácticas contables para tu equipo.</p></article>
-      <article class="card"><h3 data-i="s6_t">Apoyo a independientes</h3><p data-i="s6_p">Acompañamiento para personas con actividad económica y emprendedores.</p></article>
-    </div>
-  </div>
-</section>
+
 
 <section class="process" id="proceso">
   <div class="container">
@@ -112,42 +99,7 @@
   </div>
 </section>
 
-<section class="contact" id="contacto">
-  <div class="container contact-grid">
-    <div>
-      <h2 data-i="h_contacto">Hablemos de tu contabilidad</h2>
-      <p class="lead" data-i="contact_lead">Cuéntanos qué necesitas y te respondemos en el horario de atención.</p>
-      <div class="contact-info">
-        <p>Tel. / WhatsApp: <a href="tel:+50684141438">8414-1438</a></p>
-        <p><a href="https://wa.me/50684141438" data-i="wa_link">Escribir por WhatsApp</a></p>
-      </div>
-    </div>
-    <form id="form" novalidate>
-      <input type="hidden" name="access_key" value="3da531ae-766d-451e-be30-8b39a322fe1f">
-      <input type="hidden" name="subject" value="Nueva solicitud desde abc.cr">
-      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-      <div class="row">
-        <label><span data-i="f_nombre">Nombre completo *</span><input name="name" required autocomplete="name"></label>
-        <label><span data-i="f_tel">Teléfono o WhatsApp *</span><input name="phone" required autocomplete="tel"></label>
-      </div>
-      <label><span data-i="f_email">Correo electrónico</span><input name="email" type="email" autocomplete="email"></label>
-      <label><span data-i="f_servicio">Servicio de interés</span>
-        <select name="servicio">
-          <option value="contabilidad" data-i="s1_t">Contabilidad general</option>
-          <option value="fiscal" data-i="s2_t">Asesoría fiscal</option>
-          <option value="planillas" data-i="s3_t">Planillas y cargas sociales</option>
-          <option value="gerencial" data-i="s4_t">Contabilidad gerencial</option>
-          <option value="capacitacion" data-i="s5_t">Capacitación</option>
-          <option value="otro" data-i="otro">Otro</option>
-        </select>
-      </label>
-      <label><span data-i="f_msg">Mensaje</span><textarea name="message"></textarea></label>
-      <label class="check"><input type="checkbox" name="consent" required><span data-i="consent">Acepto el tratamiento de mis datos para responder esta solicitud, según la <a href="#privacidad">política de privacidad</a>.</span></label>
-      <button class="btn btn-primary" type="submit" data-i="btn_enviar">Enviar solicitud</button>
-      <p class="msg" id="msg" role="status" aria-live="polite"></p>
-    </form>
-  </div>
-</section>
+
 
 </main>
 

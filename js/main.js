@@ -1,6 +1,6 @@
 const T = {
  es:{nav_servicios:"Servicios",nav_proceso:"Cómo trabajamos",nav_nosotros:"Nosotros",nav_faq:"Preguntas",nav_contacto:"Contacto",
-  h1:"Contabilidad clara para decidir con tranquilidad",
+  h1:"Contabilidad transparente para decidir con tranquilidad",
   hero_lead:"Llevamos tu contabilidad y te acompañamos con tus obligaciones tributarias en Costa Rica, para que cumplas a tiempo y sepas en qué punto estás.",
   btn_info:"Solicitar información",btn_servicios:"Ver servicios",h_servicios:"Servicios de contabilidad",
   svc_intro:"Para personas físicas, trabajadores independientes, PYMES y empresas nacionales.",
@@ -35,7 +35,7 @@ const T = {
   lang_btn:"English",theme_btn:"Oscuro"
  },
  en:{nav_servicios:"Services",nav_proceso:"How we work",nav_nosotros:"About",nav_faq:"FAQ",nav_contacto:"Contact",
-  h1:"Clear accounting for confident decisions",
+  h1:"Transparent accounting for confident decisions",
   hero_lead:"We keep your books and guide you through your tax obligations in Costa Rica, so you file on time and know where you stand.",
   btn_info:"Request information",btn_servicios:"View services",h_servicios:"Accounting services",
   svc_intro:"For individuals, self-employed professionals, SMEs and national companies.",
@@ -89,13 +89,13 @@ try{
 applyLang();
 
 const slides=[...document.querySelectorAll(".slide")], dots=document.getElementById("dots"); let idx=0;
-slides.forEach((s,i)=>{ const b=document.createElement("button"); b.setAttribute("aria-label","Imagen "+(i+1)); b.onclick=()=>show(i); dots.appendChild(b); });
-function show(i){ idx=i; slides.forEach((s,j)=>s.classList.toggle("on",j===i)); [...dots.children].forEach((d,j)=>d.setAttribute("aria-current",j===i)); }
-show(0);
-if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(()=>show((idx+1)%slides.length),6000);
+if(dots) slides.forEach((s,i)=>{ const b=document.createElement("button"); b.setAttribute("aria-label","Imagen "+(i+1)); b.onclick=()=>show(i); dots.appendChild(b); });
+function show(i){ idx=i; slides.forEach((s,j)=>s.classList.toggle("on",j===i)); if(dots) [...dots.children].forEach((d,j)=>d.setAttribute("aria-current",j===i)); }
+if(slides.length) show(0);
+if(slides.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(()=>show((idx+1)%slides.length),6000);
 
 const form=document.getElementById("form"), msg=document.getElementById("msg");
-form.addEventListener("submit", async e=>{
+if(form) form.addEventListener("submit", async e=>{
   e.preventDefault();
   if(!form.checkValidity()){ form.reportValidity(); msg.textContent=T[lang].req; return; }
   msg.textContent="…";
