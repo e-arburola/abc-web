@@ -6,7 +6,7 @@
   --serif:"Georgia","Times New Roman",serif;
 }
 [data-theme="dark"]{
-  --bg:#0F1714; --bg-2:#16221E; --text:#EDEAE3; --text-2:#B9C0BB; --border:#2A3834; --green:#0B1B16; --green-2:#17302A;
+  --bg:#0F1714; --bg-2:#16221E; --text:#EDEAE3; --text-2:#B9C0BB; --border:#2A3834; --green:#2B5A4A; --green-2:#3A6F5C;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
