@@ -32,7 +32,7 @@ const T = {
   wa_float:"WhatsApp",tel_label:"Teléfono & WhatsApp:",foot_desc:"Contador Privado Incorporado · CPI N.º 35066",foot_contact:"Contacto",foot_hours_t:"Horario",
   foot_hours:"Lunes a viernes, 9:00 a. m. a 4:30 p. m.",foot_loc:"San José, San Sebastián, Paso Ancho",
   rights:"Todos los derechos reservados.",aviso:"Aviso legal",privacidad:"Política de privacidad",
-  lang_btn:"English",theme_btn:"Oscuro"
+  lang_btn:"English",theme_btn:"Oscuro",nav_info:"Información",info_h:"Información",info_lead:"Guías, fechas y anuncios de interés para contribuyentes y empresas.",info_empty:"Próximamente publicaremos aquí información de interés.",info_back:"Volver a inicio"
  },
  en:{nav_servicios:"Services",nav_proceso:"How we work",nav_nosotros:"About",nav_faq:"FAQ",nav_contacto:"Contact",
   h1:"Transparent accounting for confident decisions",
@@ -67,7 +67,7 @@ const T = {
   wa_float:"WhatsApp",tel_label:"Phone & WhatsApp:",foot_desc:"Contador Privado Incorporado · CPI No. 35066",foot_contact:"Contact",foot_hours_t:"Hours",
   foot_hours:"Monday to Friday, 9:00 a.m. to 4:30 p.m.",foot_loc:"San José, San Sebastián, Paso Ancho",
   rights:"All rights reserved.",aviso:"Legal notice",privacidad:"Privacy policy",
-  lang_btn:"Español",theme_btn:"Dark"
+  lang_btn:"Español",theme_btn:"Dark",nav_info:"Information",info_h:"Information",info_lead:"Guides, dates and announcements of interest for taxpayers and businesses.",info_empty:"Information of interest will be published here soon.",info_back:"Back to home"
  }
 };
 let lang="es";
