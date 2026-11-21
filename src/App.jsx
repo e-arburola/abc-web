@@ -246,7 +246,11 @@ const COPY = {
           text: 'Las cápsulas de la sección de Información tienen fines orientativos y no sustituyen el análisis particular de cada caso concreto.',
         },
         {
-          heading: '13. Actualización de esta política',
+          heading: '13. Créditos',
+          text: 'El video de fondo del inicio proviene de Pexels (pexels.com) y se usa bajo la licencia gratuita de Pexels.',
+        },
+        {
+          heading: '14. Actualización de esta política',
           text: 'Esta política se actualizó por última vez el 20 de noviembre de 2026.',
         },
       ],
@@ -463,7 +467,11 @@ const COPY = {
           text: 'Notes in the Information section are for guidance only and do not replace the individual analysis of each specific case.',
         },
         {
-          heading: '13. Updates to this policy',
+          heading: '13. Credits',
+          text: 'The background video on the home page comes from Pexels (pexels.com) and is used under the free Pexels license.',
+        },
+        {
+          heading: '14. Updates to this policy',
           text: 'This policy was last updated on November 20, 2026.',
         },
       ],
@@ -473,6 +481,17 @@ const COPY = {
       'Hello, I visited Accounting Bytes & Consulting (abc.cr) and would like to inquire.',
   },
 };
+
+function CRFlag({ className = '' }) {
+  return (
+    <svg viewBox="0 0 30 20" width="18" height="12" className={className} aria-hidden="true" focusable="false" style={{ borderRadius: 2, flexShrink: 0 }}>
+      <rect width="30" height="20" fill="#FFFFFF" />
+      <rect width="30" height="5" fill="#002B7F" />
+      <rect y="15" width="30" height="5" fill="#002B7F" />
+      <rect y="5" width="30" height="10" fill="#CE1126" />
+    </svg>
+  );
+}
 
 export default function App() {
   const [lang, setLang] = useState('es');
@@ -1098,7 +1117,7 @@ export default function App() {
                         }`}
                       >
                         <Phone size={14} className="text-blue-500" />
-                        <span>{t.profile.phone}</span>
+                        <span className="inline-flex items-center gap-2"><CRFlag />+506 {t.profile.phone}</span>
                       </a>
                     </div>
                   </div>
