@@ -933,14 +933,14 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => navigateTo('hero')}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  className={`inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                     isDark
-                      ? 'border-white/15 bg-white/5 text-white/80 hover:bg-white/15'
-                      : 'border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200'
+                      ? 'border-white/15 bg-white/5 text-white hover:bg-white/10'
+                      : 'border-slate-300 bg-white text-slate-800 hover:bg-slate-100'
                   }`}
                 >
-                  <X size={14} />
-                  <span>{t.nav.home}</span>
+                  <ArrowLeft size={16} />
+                  <span>{t.info.backHome}</span>
                 </button>
               </div>
 
