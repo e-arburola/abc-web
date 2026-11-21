@@ -32,6 +32,8 @@ import { BLOG_POSTS } from './capsulas.js';
 
 const WEB3FORMS_KEY = '3da531ae-766d-451e-be30-8b39a322fe1f';
 const WHATSAPP_NUMBER = '50684141438';
+// Clave de Web3Forms con destino tributario@abc.cr (boletín).
+const NEWSLETTER_ACCESS_KEY = '006a52e9-e9e5-44a3-b8a7-bbe573ef0967';
 
 
 
@@ -187,7 +189,7 @@ const COPY = {
       newsletterError: 'Ingrese un correo válido o intente nuevamente.',
       newsletterSoon: 'El boletín estará disponible muy pronto.',
       newsletterConsent: 'Acepto que mi correo se incluya en la lista de distribución tributario@abc.cr y que mis datos se traten para ese fin, según la Política Legal y Privacidad.',
-      consent: 'Acepto que mis datos se traten para responder mi consulta y, si marco la casilla, para enviarme el boletín, según la Política Legal y Privacidad.',
+      consent: 'Acepto que mis datos se traten para responder mi consulta, según la Política Legal y Privacidad.',
       newsletterCheck: 'Suscribirme al boletín informativo (cápsulas y avisos).',
       legalBtn: 'Política Legal y Privacidad',
     },
@@ -210,11 +212,11 @@ const COPY = {
         },
         {
           heading: '4. Datos que recopilamos',
-          text: 'Formulario de contacto: nombre y teléfono o WhatsApp (obligatorios); correo electrónico, servicio de interés y mensaje (facultativos). Boletín informativo: si marca la casilla, usamos el correo electrónico del formulario. En este sitio no solicitamos datos sensibles ni datos de tarjetas de pago.',
+          text: 'Formulario de contacto: nombre y teléfono o WhatsApp (obligatorios); correo electrónico, servicio de interés y mensaje (facultativos). Boletín informativo: correo electrónico, en su propio formulario. En este sitio no solicitamos datos sensibles ni datos de tarjetas de pago.',
         },
         {
           heading: '5. Finalidad y base legal',
-          text: 'Usamos sus datos para responder su consulta, darle seguimiento por el medio que indique y, si marca la casilla del boletín, enviarle cápsulas informativas por correo. No usamos sus datos para publicidad de terceros. La base legal es su consentimiento expreso, otorgado por escrito por medio electrónico al marcar la casilla antes de enviar el formulario. Puede revocarlo en cualquier momento, de la misma forma en que lo otorgó, sin efecto retroactivo.',
+          text: 'Usamos sus datos para responder su consulta, darle seguimiento por el medio que indique y, si se suscribe al boletín, enviarle cápsulas informativas por correo. No usamos sus datos para publicidad de terceros. La base legal es su consentimiento expreso, otorgado por escrito por medio electrónico al marcar la casilla antes de enviar el formulario. Puede revocarlo en cualquier momento, de la misma forma en que lo otorgó, sin efecto retroactivo.',
         },
         {
           heading: '6. Proveedores que procesan datos',
@@ -409,7 +411,7 @@ const COPY = {
       newsletterError: 'Please enter a valid email address or try again.',
       newsletterSoon: 'The newsletter will be available soon.',
       newsletterConsent: 'I agree that my email is added to the tributario@abc.cr distribution list and that my data is processed for that purpose, under the Legal & Privacy Policy.',
-      consent: 'I agree that my data is processed to answer my inquiry and, if I tick the box, to send me the newsletter, under the Legal & Privacy Policy.',
+      consent: 'I agree that my data is processed to answer my inquiry, under the Legal & Privacy Policy.',
       newsletterCheck: 'Subscribe to the informative newsletter (notes and alerts).',
       legalBtn: 'Legal & Privacy Policy',
     },
@@ -432,11 +434,11 @@ const COPY = {
         },
         {
           heading: '4. Data we collect',
-          text: 'Contact form: name and phone or WhatsApp (required); email, service of interest and message (optional). Newsletter: if you tick the box, we use the email from the form. This site does not request sensitive data or payment card data.',
+          text: 'Contact form: name and phone or WhatsApp (required); email, service of interest and message (optional). Newsletter: email address, in its own form. This site does not request sensitive data or payment card data.',
         },
         {
           heading: '5. Purpose and legal basis',
-          text: 'We use your data to answer your inquiry, follow up by the channel you indicate and, if you tick the newsletter box, send you informative notes by email. We do not use your data for third-party advertising. The legal basis is your express consent, given in writing by electronic means when you tick the box before sending the form. You may revoke it at any time, in the same way you gave it, without retroactive effect.',
+          text: 'We use your data to answer your inquiry, follow up by the channel you indicate and, if you subscribe to the newsletter, send you informative notes by email. We do not use your data for third-party advertising. The legal basis is your express consent, given in writing by electronic means when you tick the box before sending the form. You may revoke it at any time, in the same way you gave it, without retroactive effect.',
         },
         {
           heading: '6. Service providers that process data',
@@ -514,7 +516,55 @@ export default function App() {
     message: '',
   });
   const [sendingForm, setSendingForm] = useState(false);
-  const [wantsNewsletter, setWantsNewsletter] = useState(false);
+  // Optional Newsletter state (linked to tributario@abc.cr distribution list)
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [sendingNewsletter, setSendingNewsletter] = useState(false);
+  const [newsletterFeedback, setNewsletterFeedback] = useState(null);
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    if (!NEWSLETTER_ACCESS_KEY) {
+      setNewsletterFeedback({ type: 'error', text: t.contact.newsletterSoon });
+      return;
+    }
+    if (!newsletterEmail.trim()) {
+      setNewsletterFeedback({ type: 'error', text: t.contact.newsletterError });
+      return;
+    }
+
+    setSendingNewsletter(true);
+    setNewsletterFeedback(null);
+
+    try {
+      const payload = {
+        access_key: NEWSLETTER_ACCESS_KEY,
+        subject: 'Inclusión en lista de distribución (tributario@abc.cr) — abc.cr',
+        from_name: 'Suscriptor Newsletter abc.cr',
+        email: newsletterEmail.trim(),
+        distribution_list: 'tributario@abc.cr',
+        message: `Solicitud opcional para agregar el correo ${newsletterEmail.trim()} a la lista de distribución asociada a tributario@abc.cr.`,
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setNewsletterFeedback({ type: 'success', text: t.contact.newsletterSuccess });
+        setNewsletterEmail('');
+      } else {
+        setNewsletterFeedback({ type: 'error', text: t.contact.newsletterError });
+      }
+    } catch {
+      setNewsletterFeedback({ type: 'error', text: t.contact.newsletterError });
+    } finally {
+      setSendingNewsletter(false);
+    }
+  };
+
   const [formFeedback, setFormFeedback] = useState(null);
 
 
@@ -555,7 +605,6 @@ export default function App() {
         email: formData.email,
         service: formData.service || 'Consulta general',
         message: formData.message,
-        newsletter: wantsNewsletter ? 'Sí, suscribir al boletín' : 'No',
       };
 
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -568,7 +617,6 @@ export default function App() {
       if (data.success) {
         setFormFeedback({ type: 'success', text: t.contact.sentSuccess });
         setFormData({ name: '', email: '', service: '', message: '' });
-        setWantsNewsletter(false);
       } else {
         setFormFeedback({ type: 'error', text: t.contact.sentError });
       }
@@ -1169,6 +1217,66 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Optional Newsletter Box */}
+                    <div
+                      className={`rounded-xl border p-5 ${
+                        isDark
+                          ? 'border-blue-500/20 bg-blue-950/25'
+                          : 'border-slate-200 bg-slate-50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 text-sm font-semibold text-blue-400">
+                        <BellPlus size={17} />
+                        <span>{t.contact.newsletterTitle}</span>
+                      </div>
+                      <p
+                        className={`mt-1.5 text-xs leading-relaxed ${
+                          isDark ? 'text-slate-300' : 'text-slate-600'
+                        }`}
+                      >
+                        {t.contact.newsletterDesc}
+                      </p>
+
+                      <form onSubmit={handleNewsletterSubmit} className="mt-3 space-y-2">
+                        <label className="flex items-start gap-2 text-xs leading-relaxed">
+                          <input type="checkbox" required className="mt-0.5" />
+                          <span>{t.contact.newsletterConsent}</span>
+                        </label>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="email"
+                          value={newsletterEmail}
+                          onChange={(e) => setNewsletterEmail(e.target.value)}
+                          placeholder={t.contact.newsletterPlaceholder}
+                          className={`flex-1 rounded-lg border px-3.5 py-2 text-xs sm:text-sm focus:border-blue-500 focus:outline-none ${
+                            isDark
+                              ? 'border-white/15 bg-[#030712] text-white'
+                              : 'border-slate-300 bg-white text-slate-900'
+                          }`}
+                        />
+                        <button
+                          type="submit"
+                          disabled={sendingNewsletter}
+                          className="rounded-lg bg-blue-600 px-4 py-2 text-xs sm:text-sm font-medium text-white hover:bg-blue-500 transition-colors disabled:opacity-60"
+                        >
+                          {sendingNewsletter ? t.contact.newsletterSending : t.contact.newsletterBtn}
+                        </button>
+                        </div>
+                      </form>
+
+                      {newsletterFeedback && (
+                        <p
+                          className={`mt-2 text-xs ${
+                            newsletterFeedback.type === 'success'
+                              ? 'text-emerald-400'
+                              : 'text-rose-400'
+                          }`}
+                        >
+                          {newsletterFeedback.text}
+                        </p>
+                      )}
+                    </div>
+
                     <button
                       type="button"
                       onClick={() => setLegalOpen(true)}
@@ -1251,11 +1359,6 @@ export default function App() {
                         }`}
                       />
                     </div>
-
-                    <label className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed">
-                      <input type="checkbox" checked={wantsNewsletter} onChange={(e) => setWantsNewsletter(e.target.checked)} className="mt-0.5" />
-                      <span>{t.contact.newsletterCheck}</span>
-                    </label>
 
                     <label className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed">
                       <input type="checkbox" name="consent" required className="mt-0.5" />

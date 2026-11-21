@@ -14,7 +14,7 @@ Reemplace los archivos de `public/` con los mismos nombres:
 3. Péguelo arriba del todo, para que aparezca primero.
 
 ## Boletín informativo
-La casilla "Suscribirme al boletín" del formulario de contacto envía sus solicitudes con la misma clave de Web3Forms, así que llegan a `contacto@abc.cr`.
+El formulario del boletín usa la clave de Web3Forms con destino `tributario@abc.cr`, guardada en `NEWSLETTER_ACCESS_KEY` en `src/App.jsx`.
 
 ## Desarrollo local
 ```bash
