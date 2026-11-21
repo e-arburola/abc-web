@@ -912,7 +912,7 @@ export default function App() {
 
       {/* OVERLAY PANELS (Services, Commitment, Profile, Contact) */}
       {isOverlayOpen && (
-        <div className="fixed inset-0 z-20 overflow-y-auto pt-24 pb-24 px-6 md:px-12 lg:px-16">
+        <div className="fixed inset-0 z-10 overflow-y-auto pt-24 pb-24 px-6 md:px-12 lg:px-16">
           <div className="mx-auto max-w-5xl">
             <div
               className={`rounded-2xl border p-6 sm:p-10 backdrop-blur-xl shadow-2xl transition-colors ${
