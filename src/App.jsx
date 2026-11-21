@@ -687,10 +687,10 @@ export default function App() {
                 src="/logo.svg"
                 alt="Accounting Bytes & Consulting"
                 onError={() => setLogoError(true)}
-                className={`h-10 w-auto sm:h-11 object-contain transition-all ${
+                className={`h-14 w-auto sm:h-16 object-contain transition-all ${
                   isDark
-                    ? 'rounded-md bg-[#E7E5E2]/95 px-2.5 py-1 shadow-sm'
-                    : 'rounded-md bg-white/95 px-2.5 py-1 shadow-sm ring-1 ring-slate-200'
+                    ? 'rounded-md bg-white px-3 py-1.5 shadow-lg ring-1 ring-white/20'
+                    : 'rounded-md bg-white/95 px-3 py-1.5 shadow-sm ring-1 ring-slate-200'
                 }`}
               />
             ) : (
