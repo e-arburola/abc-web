@@ -28,3 +28,10 @@ npm run build   # genera la carpeta dist/
 - Comando de compilación: `npm run build`.
 - Directorio de salida: `dist`.
 - Rama de producción: `main`.
+
+## Estándar para imágenes
+- Todas las imágenes tienen `alt` descriptivo (o `alt=""` si son decorativas).
+- Todas las imágenes indican `width` y `height` con el tamaño real del archivo, para evitar saltos de diseño al cargar. Para el logo SVG, use el `viewBox` del archivo (`public/logo.svg`: 1740 × 620).
+- Las imágenes que están debajo del primer pantallazo llevan `loading="lazy"` y `decoding="async"`. Las que se ven al abrir la página (logo, video de inicio) no llevan `lazy`.
+- Logotipos en SVG. Fotografías en JPG, de 512 px de lado como mínimo y sin pasar de 1200 px.
+
