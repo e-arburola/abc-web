@@ -689,6 +689,8 @@ export default function App() {
             {!logoError ? (
               <img
                 src="/logo.svg"
+                width="1740"
+                height="620"
                 alt="Accounting Bytes & Consulting"
                 onError={() => setLogoError(true)}
                 className={`h-14 w-auto sm:h-16 object-contain transition-all ${
@@ -1088,6 +1090,10 @@ export default function App() {
                       {!photoError ? (
                         <img
                           src="/perfil.jpg"
+                          width="512"
+                          height="512"
+                          loading="lazy"
+                          decoding="async"
                           alt={t.profile.name}
                           onError={() => setPhotoError(true)}
                           className="h-full w-full object-cover"
