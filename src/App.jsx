@@ -123,7 +123,7 @@ const COPY = {
     profile: {
       tag: 'Perfil Profesional',
       name: 'Eduardo Bermúdez Arburola',
-      role: 'Contador Privado Incorporado (CPI) • Costa Rica',
+      role: 'Contador Privado Incorporado (CPI) N.º 35066 • Costa Rica',
       bio: 'Profesional en contaduría y administración con enfoque en gestión contable, cumplimiento tributario y organización de procesos administrativos para empresas y personas físicas en Costa Rica.',
       academicTitle: 'Formación Académica',
       education: [
@@ -345,7 +345,7 @@ const COPY = {
     profile: {
       tag: 'Professional Profile',
       name: 'Eduardo Bermúdez Arburola',
-      role: 'Incorporated Private Accountant (CPI) • Costa Rica',
+      role: 'Incorporated Private Accountant (CPI) No. 35066 • Costa Rica',
       bio: 'Accounting and business professional focused on accounting management, tax compliance, and administrative process organization for businesses and individuals in Costa Rica.',
       academicTitle: 'Academic Background',
       education: [
