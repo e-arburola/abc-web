@@ -486,9 +486,9 @@ function CRFlag({ className = '' }) {
   return (
     <svg viewBox="0 0 30 20" width="18" height="12" className={className} aria-hidden="true" focusable="false" style={{ borderRadius: 2, flexShrink: 0 }}>
       <rect width="30" height="20" fill="#FFFFFF" />
-      <rect width="30" height="5" fill="#002B7F" />
-      <rect y="15" width="30" height="5" fill="#002B7F" />
-      <rect y="5" width="30" height="10" fill="#CE1126" />
+      <rect width="30" height="3.34" fill="#002B7F" />
+      <rect y="6.66" width="30" height="6.68" fill="#CE1126" />
+      <rect y="16.66" width="30" height="3.34" fill="#002B7F" />
     </svg>
   );
 }
@@ -1208,7 +1208,7 @@ export default function App() {
                         <Phone className="text-blue-500" size={18} />
                         <div>
                           <p className="text-xs text-blue-400">{t.contact.phoneLabel}</p>
-                          <p className="font-medium">{t.profile.phone}</p>
+                          <p className="font-medium inline-flex items-center gap-2"><CRFlag />+506 {t.profile.phone}</p>
                         </div>
                       </div>
                     </div>
