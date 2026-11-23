@@ -90,17 +90,21 @@ export const BLOG_POSTS = [
       en: 'Compliance Tracking for Inactive Companies and RTBF',
     },
     summary: {
-      es: 'Recordatorio sobre el seguimiento preventivo de obligaciones aplicables a personas jurídicas inactivas y el Registro de Transparencia y Beneficiarios Finales.',
-      en: 'Reminder on preventive tracking of obligations applicable to inactive legal entities and the Transparency and Beneficial Ownership Registry.',
+      es: 'Cada 30 de abril: declaración informativa D-272 de sociedades inactivas y declaración ordinaria anual del Registro de Transparencia y Beneficiarios Finales (RTBF).',
+      en: 'Every April 30: informational return D-272 for inactive companies and the annual ordinary declaration of the Transparency and Beneficial Ownership Registry (RTBF).',
     },
     content: {
       es: [
-        'Aunque una sociedad no registre actividad comercial ordinaria, puede mantener deberes formales y de transparencia que requieren seguimiento calendarizado.',
-        'Contar con un calendario de cumplimiento preventivo ayuda a evitar omisiones y a mantener al día la información requerida por las instancias correspondientes.',
+        'Sociedad inactiva no significa sociedad sin obligaciones. Una sociedad inactiva también debe presentar su declaración informativa anual ante Hacienda, con el formulario D-272, según la Resolución MH-DGT-RES-0013-2025. Se presenta a través de TRIBU-CR, a más tardar el 30 de abril de cada año, y solo durante el periodo que establece la normativa.',
+        'El Registro de Transparencia y Beneficiarios Finales (RTBF) es obligatorio según la Ley 9416 y la Circular DPJ-002-2026 del Registro Nacional. La declaración ordinaria anual vence el 30 de abril de cada año, y solo durante el periodo que establece la normativa. Si la entidad no cumple, el Registro Nacional no emite certificaciones de personería jurídica ni inscribe documentos, y el incumplimiento debe anotarse en las certificaciones notariales.',
+        'El incumplimiento puede generar una multa equivalente al 2% de la cifra de los ingresos brutos del periodo fiscal anterior, con un mínimo de tres salarios base (¢1.386.600) y un máximo de cien salarios base (¢46.220.000), según los montos vigentes en 2026.',
+        'Recomendación: antes de marzo de cada año, verifique si la sociedad es activa o inactiva, qué declaraciones le aplican y si su información en el RTBF está actualizada.',
       ],
       en: [
-        'Even when a company has no ordinary commercial activity, it may carry formal and transparency duties that require scheduled follow-up.',
-        'Having a preventive compliance calendar helps avoid omissions and keeps required information up to date.',
+        'An inactive company is not a company without obligations. An inactive company must also file its annual informational return with Hacienda, form D-272, under Resolution MH-DGT-RES-0013-2025. It is filed through TRIBU-CR no later than April 30 of each year, and only during the period set by the regulations.',
+        'The Transparency and Beneficial Ownership Registry (RTBF) is mandatory under Law 9416 and Circular DPJ-002-2026 of the National Registry. The annual ordinary declaration is due April 30 of each year, and only during the period set by the regulations. If the entity does not comply, the National Registry does not issue legal-capacity certificates or record documents, and the non-compliance must be noted on notarial certificates.',
+        'Non-compliance may result in a fine equal to 2% of gross income for the prior fiscal period, with a minimum of three base salaries (¢1,386,600) and a maximum of one hundred base salaries (¢46,220,000), based on amounts in effect for 2026.',
+        'Recommendation: before March of each year, check whether the company is active or inactive, which declarations apply to it, and whether its RTBF information is up to date.',
       ],
     },
   },
