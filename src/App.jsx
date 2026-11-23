@@ -125,7 +125,7 @@ const COPY = {
     profile: {
       tag: 'Perfil Profesional',
       name: 'Eduardo Bermúdez Arburola',
-      role: 'Contador Privado Incorporado (CPI) N.º 35066 • Costa Rica',
+      role: 'Contador Privado Incorporado (CPI) • Costa Rica',
       bio: 'Profesional en contaduría y administración con enfoque en gestión contable, cumplimiento tributario y organización de procesos administrativos para empresas y personas físicas en Costa Rica.',
       academicTitle: 'Formación Académica',
       education: [
@@ -200,7 +200,7 @@ const COPY = {
       sections: [
         {
           heading: '1. Identidad y alcance profesional',
-          text: 'Este sitio pertenece a Accounting Bytes & Consulting (abc.cr), práctica profesional ejercida en Costa Rica por Eduardo Bermúdez Arburola, Contador Privado Incorporado (CPI), CPI N.º 35066. Ofrecemos información y servicios de contabilidad privada y asesoría tributaria dentro del marco legal aplicable. No prestamos servicios de auditoría externa ni emitimos dictámenes de auditoría.',
+          text: 'Este sitio pertenece a Accounting Bytes & Consulting (abc.cr), práctica profesional ejercida en Costa Rica por Eduardo Bermúdez Arburola, Contador Privado Incorporado (CPI). Ofrecemos información y servicios de contabilidad privada y asesoría tributaria dentro del marco legal aplicable. No prestamos servicios de auditoría externa ni emitimos dictámenes de auditoría.',
         },
         {
           heading: '2. Confidencialidad y secreto profesional',
@@ -347,7 +347,7 @@ const COPY = {
     profile: {
       tag: 'Professional Profile',
       name: 'Eduardo Bermúdez Arburola',
-      role: 'Incorporated Private Accountant (CPI) No. 35066 • Costa Rica',
+      role: 'Incorporated Private Accountant (CPI) • Costa Rica',
       bio: 'Accounting and business professional focused on accounting management, tax compliance, and administrative process organization for businesses and individuals in Costa Rica.',
       academicTitle: 'Academic Background',
       education: [
@@ -422,7 +422,7 @@ const COPY = {
       sections: [
         {
           heading: '1. Identity and professional scope',
-          text: 'This website belongs to Accounting Bytes & Consulting (abc.cr), a professional practice in Costa Rica carried out by Eduardo Bermúdez Arburola, Incorporated Private Accountant (CPI), CPI No. 35066. We provide private accounting information and services and tax advisory within applicable law. We do not provide external audit services or issue audit opinions.',
+          text: 'This website belongs to Accounting Bytes & Consulting (abc.cr), a professional practice in Costa Rica carried out by Eduardo Bermúdez Arburola, Incorporated Private Accountant (CPI). We provide private accounting information and services and tax advisory within applicable law. We do not provide external audit services or issue audit opinions.',
         },
         {
           heading: '2. Confidentiality and professional secrecy',
