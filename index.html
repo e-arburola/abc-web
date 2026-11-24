@@ -40,6 +40,13 @@
       content="Contador Privado Incorporado, CPI Costa Rica, abc.cr, Accounting Bytes & Consulting, NIIF, IVA, Renta, Formulario D-270, venta bienes inmuebles, retenciones en la fuente, servicios transfronterizos, sociedades inactivas, RTBF"
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      try {
+        if (localStorage.getItem('abc-tema') === 'claro') {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    </script>
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
