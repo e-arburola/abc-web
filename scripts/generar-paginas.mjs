@@ -32,6 +32,8 @@ const pagina = (post, lang) => {
   const otro = lang === 'es' ? 'en' : 'es';
   const url = `${SITIO}${ruta(lang, post.id)}`;
   const titulo = post.title[lang];
+  // Título de la pestaña: se agrega la marca solo si cabe en 60 caracteres.
+  const tituloDocumento = titulo.length + 6 <= 60 ? `${titulo} | ABC` : titulo;
   const resumen = post.summary[lang];
   const volverA = lang === 'es' ? '/capsulas/' : '/capsulas/?lang=en';
   const volver = lang === 'es' ? 'Volver a cápsulas' : 'Back to insights';
@@ -57,7 +59,7 @@ const pagina = (post, lang) => {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${esc(titulo)} | ${NOMBRE}</title>
+    <title>${esc(tituloDocumento)}</title>
     <meta name="description" content="${esc(resumen)}" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="${url}" />
