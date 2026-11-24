@@ -6,6 +6,7 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BLOG_POSTS } from '../src/capsulas.js';
+import { VISTAS } from '../src/rutas.js';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const pub = join(raiz, 'public');
@@ -126,7 +127,7 @@ for (const post of BLOG_POSTS) {
 // Sitemap: inicio, inicio en inglés y todas las cápsulas en ambos idiomas
 const hoy = new Date().toISOString().slice(0, 10);
 const urls = [
-  { loc: `${SITIO}/`, prioridad: '1.0', cambio: 'weekly' },
+  ...VISTAS.map((v) => ({ loc: `${SITIO}${v.ruta}`, prioridad: v.id === 'hero' ? '1.0' : '0.9', cambio: 'weekly' })),
   ...BLOG_POSTS.flatMap((p) => [
     { loc: `${SITIO}${ruta('es', p.id)}`, prioridad: '0.8', cambio: 'monthly' },
     { loc: `${SITIO}${ruta('en', p.id)}`, prioridad: '0.6', cambio: 'monthly' },
