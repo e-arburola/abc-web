@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 
 import { BLOG_POSTS } from './capsulas.js';
+import { rutaDeVista, vistaDeRuta } from './rutas.js';
 
 const WEB3FORMS_KEY = '3da531ae-766d-451e-be30-8b39a322fe1f';
 const WHATSAPP_NUMBER = '50684141438';
@@ -495,13 +496,28 @@ function CRFlag({ className = '' }) {
   );
 }
 
-export default function App() {
+export default function App({ vistaInicial = 'hero' } = {}) {
   const [lang, setLang] = useState('es');
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 'hero' | 'services' | 'commitment' | 'profile' | 'contact' | 'blog'
-  const [activeView, setActiveView] = useState('hero');
+  const [activeView, setActiveView] = useState(vistaInicial);
+
+  // La dirección de la página acompaña a la vista: /servicios/, /contacto/, etc.
+  useEffect(() => {
+    const ruta = rutaDeVista(activeView);
+    if (window.location.pathname !== ruta) {
+      window.history.pushState(null, '', ruta);
+    }
+  }, [activeView]);
+
+  // Atrás y adelante del navegador vuelven a la vista correspondiente.
+  useEffect(() => {
+    const alCambiarRuta = () => setActiveView(vistaDeRuta(window.location.pathname));
+    window.addEventListener('popstate', alCambiarRuta);
+    return () => window.removeEventListener('popstate', alCambiarRuta);
+  }, []);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [legalOpen, setLegalOpen] = useState(false);
 

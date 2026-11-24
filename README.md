@@ -16,6 +16,11 @@ Reemplace los archivos de `public/` con los mismos nombres:
 
 El `id` tiene formato `DDMMAA-titulo-corto` (por ejemplo `181126-modificacion-facturaelectronica`) y se usa como nombre de la carpeta y de la dirección de la página.
 
+## Páginas y direcciones
+Cada sección de la página principal tiene su propia dirección, definida en `src/rutas.js`:
+`/` (inicio), `/servicios/`, `/compromiso/`, `/perfil/`, `/capsulas/` (información) y `/contacto/`.
+Al compilar (`npm run build`), el script `scripts/prerender.mjs` genera el HTML de cada una, para que los buscadores vean el contenido. Para cambiar un título o una descripción, edite `src/rutas.js`.
+
 ## Boletín informativo
 El formulario del boletín usa la clave de Web3Forms con destino `tributario@abc.cr`, guardada en `NEWSLETTER_ACCESS_KEY` en `src/App.jsx`.
 
