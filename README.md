@@ -12,6 +12,9 @@ Reemplace los archivos de `public/` con los mismos nombres:
 1. Abra `src/capsulas.js`.
 2. Copie un bloque completo de cápsula, cambie `id` (fecha y título corto, por ejemplo `181126-anuncio-hacienda-cambio`), fechas, títulos, resumen y contenido.
 3. Péguelo arriba del todo, para que aparezca primero.
+4. No hace falta crear páginas a mano. Al compilar (`npm run build`), el script `scripts/generar-paginas.mjs` crea una página estática por cápsula en `public/capsulas/<id>/` (español) y `public/en/capsulas/<id>/` (inglés), y actualiza `public/sitemap.xml`.
+
+El `id` tiene formato `DDMMAA-titulo-corto` (por ejemplo `181126-modificacion-facturaelectronica`) y se usa como nombre de la carpeta y de la dirección de la página.
 
 ## Boletín informativo
 El formulario del boletín usa la clave de Web3Forms con destino `tributario@abc.cr`, guardada en `NEWSLETTER_ACCESS_KEY` en `src/App.jsx`.

@@ -1472,14 +1472,13 @@ export default function App() {
                       </p>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPostId(post.id)}
+                    <a
+                      href={lang === 'en' ? `/en/capsulas/${post.id}/` : `/capsulas/${post.id}/`}
                       className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-500 hover:underline"
                     >
                       <span>{t.info.readCapsule}</span>
                       <ArrowRight size={15} />
-                    </button>
+                    </a>
                   </article>
                 ))}
               </div>
