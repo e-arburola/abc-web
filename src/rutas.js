@@ -4,44 +4,44 @@ export const VISTAS = [
   {
     id: 'hero',
     ruta: '/',
-    titulo: 'Accounting Bytes & Consulting | Contador Privado Incorporado en Costa Rica',
+    titulo: 'Accounting Bytes & Consulting | CPI en Costa Rica',
     descripcion:
-      'Contabilidad, NIIF, IVA, renta, Formulario D-270, retenciones y RTBF para pymes y personas en Costa Rica. Servicio de Eduardo Bermúdez, Contador Privado Incorporado.',
+      'Contabilidad NIIF, IVA, renta, Formulario D-270, retenciones y RTBF para pymes y personas en Costa Rica. Eduardo Bermúdez, Contador Privado Incorporado.',
   },
   {
     id: 'services',
     ruta: '/servicios/',
-    titulo: 'Servicios Contables y Tributarios | Accounting Bytes & Consulting',
+    titulo: 'Servicios Contables y Tributarios | ABC',
     descripcion:
-      'Servicios contables y tributarios para personas y pymes en Costa Rica, bajo el alcance del Contador Privado Incorporado (CPI).',
+      'Contabilidad, IVA, renta, Formulario D-270, sociedades inactivas y RTBF para personas y pymes en Costa Rica, según el alcance del Contador Privado Incorporado.',
   },
   {
     id: 'commitment',
     ruta: '/compromiso/',
     titulo: 'Compromiso | Accounting Bytes & Consulting',
     descripcion:
-      'Trabajamos con criterio técnico, confidencialidad y cercanía para brindar información contable y tributaria clara.',
+      'Trabajamos con criterio técnico, confidencialidad y cercanía para brindar a personas y pymes en Costa Rica información contable y tributaria clara.',
   },
   {
     id: 'profile',
     ruta: '/perfil/',
     titulo: 'Perfil Profesional | Accounting Bytes & Consulting',
     descripcion:
-      'Perfil profesional de Eduardo Bermúdez Arburola, Contador Privado Incorporado en Costa Rica.',
+      'Perfil de Eduardo Bermúdez Arburola, Contador Privado Incorporado (CPI) en Costa Rica: enfoque de trabajo y servicios de contabilidad para pymes y personas.',
   },
   {
     id: 'blog',
     ruta: '/capsulas/',
-    titulo: 'Información: cápsulas y novedades | Accounting Bytes & Consulting',
+    titulo: 'Información y cápsulas | ABC',
     descripcion:
-      'Publicaciones informativas, criterios técnicos y avisos normativos de contabilidad y tributación en Costa Rica.',
+      'Cápsulas sobre contabilidad y tributación en Costa Rica: Formulario D-270, factura electrónica, RTBF y sociedades inactivas, con fechas y criterios técnicos.',
   },
   {
     id: 'contact',
     ruta: '/contacto/',
-    titulo: 'Hablemos | Contacto | Accounting Bytes & Consulting',
+    titulo: 'Contacto | Accounting Bytes & Consulting',
     descripcion:
-      'Solicite información sobre servicios de contabilidad y asesoría fiscal en Costa Rica por formulario, WhatsApp o correo.',
+      'Escriba por formulario, WhatsApp, teléfono o correo para consultar sobre contabilidad, asesoría fiscal y cumplimiento tributario para pymes en Costa Rica.',
   },
 ];
 

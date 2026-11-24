@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 
 import { BLOG_POSTS } from './capsulas.js';
-import { rutaDeVista, vistaDeRuta } from './rutas.js';
+import { VISTAS, rutaDeVista, vistaDeRuta } from './rutas.js';
 
 const WEB3FORMS_KEY = '3da531ae-766d-451e-be30-8b39a322fe1f';
 const WHATSAPP_NUMBER = '50684141438';
@@ -534,6 +534,19 @@ export default function App({ vistaInicial = 'hero' } = {}) {
   // 'hero' | 'services' | 'commitment' | 'profile' | 'contact' | 'blog'
   const [activeView, setActiveView] = useState(vistaInicial);
 
+  // Al cambiar de sección, el título, la descripción y el canónico cambian con ella (en español).
+  useEffect(() => {
+    if (lang !== 'es') return;
+    const vista = VISTAS.find((v) => v.id === activeView);
+    if (!vista) return;
+    document.title = vista.titulo;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', vista.descripcion);
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://abc.cr${vista.ruta}`);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', vista.titulo);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', vista.descripcion);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', `https://abc.cr${vista.ruta}`);
+  }, [activeView, lang]);
+
   // La dirección de la página acompaña a la vista: /servicios/, /contacto/, etc.
   useEffect(() => {
     const ruta = rutaDeVista(activeView);
@@ -999,9 +1012,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
               {/* SERVICES OVERLAY */}
               {activeView === 'services' && (
                 <div>
-                  <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+                  <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
                     {t.services.title}
-                  </h2>
+                  </h1>
                   <p
                     className={`mt-2 max-w-2xl text-sm sm:text-base ${
                       isDark ? 'text-slate-300' : 'text-slate-600'
@@ -1012,9 +1025,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
                   {/* Category 1 */}
                   <div className="mt-8">
-                    <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-blue-400">
+                    <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-blue-400">
                       {t.services.cat1Title}
-                    </h3>
+                    </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {t.services.cat1Items.map((srv) => {
                         const Icon = srv.icon;
@@ -1029,7 +1042,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                           >
                             <div>
                               <Icon className="mb-3 text-blue-500" size={22} />
-                              <h4 className="text-base font-semibold">{srv.title}</h4>
+                              <h3 className="text-base font-semibold">{srv.title}</h3>
                               <p
                                 className={`mt-2 text-xs sm:text-sm leading-relaxed ${
                                   isDark ? 'text-slate-300' : 'text-slate-600'
@@ -1054,9 +1067,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
                   {/* Category 2 */}
                   <div className="mt-10">
-                    <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-blue-400">
+                    <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-blue-400">
                       {t.services.cat2Title}
-                    </h3>
+                    </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {t.services.cat2Items.map((srv) => {
                         const Icon = srv.icon;
@@ -1071,7 +1084,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                           >
                             <div>
                               <Icon className="mb-3 text-blue-500" size={22} />
-                              <h4 className="text-base font-semibold">{srv.title}</h4>
+                              <h3 className="text-base font-semibold">{srv.title}</h3>
                               <p
                                 className={`mt-2 text-xs sm:text-sm leading-relaxed ${
                                   isDark ? 'text-slate-300' : 'text-slate-600'
@@ -1099,9 +1112,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
               {/* COMMITMENT OVERLAY */}
               {activeView === 'commitment' && (
                 <div className="max-w-3xl space-y-5">
-                  <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+                  <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
                     {t.commitment.title}
-                  </h2>
+                  </h1>
                   <p className="text-base sm:text-lg font-medium leading-relaxed text-blue-400">
                     {t.commitment.lead}
                   </p>
@@ -1180,9 +1193,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
                   <div className="md:col-span-2 space-y-5">
                     <div>
-                      <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+                      <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
                         {t.profile.name}
-                      </h2>
+                      </h1>
                       <p className="mt-1 text-sm font-medium text-blue-400">{t.profile.role}</p>
                     </div>
 
@@ -1230,9 +1243,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div>
-                      <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight">
+                      <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight">
                         {t.contact.title}
-                      </h2>
+                      </h1>
                       <p
                         className={`mt-2 text-sm sm:text-base ${
                           isDark ? 'text-slate-300' : 'text-slate-600'
