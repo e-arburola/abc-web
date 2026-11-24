@@ -140,12 +140,12 @@ for (const post of BLOG_POSTS) {
 }
 
 // Sitemap: inicio, inicio en inglés y todas las cápsulas en ambos idiomas
-const hoy = new Date().toISOString().slice(0, 10);
+const masReciente = BLOG_POSTS.map((p) => fechaISO(p.id)).sort().at(-1);
 const urls = [
-  ...VISTAS.map((v) => ({ loc: `${SITIO}${v.ruta}`, prioridad: v.id === 'hero' ? '1.0' : '0.9', cambio: 'weekly' })),
+  ...VISTAS.map((v) => ({ loc: `${SITIO}${v.ruta}`, prioridad: v.id === 'hero' ? '1.0' : '0.9', cambio: 'weekly', fecha: masReciente })),
   ...BLOG_POSTS.flatMap((p) => [
-    { loc: `${SITIO}${ruta('es', p.id)}`, prioridad: '0.8', cambio: 'monthly' },
-    { loc: `${SITIO}${ruta('en', p.id)}`, prioridad: '0.6', cambio: 'monthly' },
+    { loc: `${SITIO}${ruta('es', p.id)}`, prioridad: '0.8', cambio: 'monthly', fecha: fechaISO(p.id) },
+    { loc: `${SITIO}${ruta('en', p.id)}`, prioridad: '0.6', cambio: 'monthly', fecha: fechaISO(p.id) },
   ]),
 ];
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -154,7 +154,7 @@ ${urls
   .map(
     (u) => `  <url>
     <loc>${u.loc}</loc>
-    <lastmod>${hoy}</lastmod>
+    <lastmod>${u.fecha}</lastmod>
     <changefreq>${u.cambio}</changefreq>
     <priority>${u.prioridad}</priority>
   </url>`,
