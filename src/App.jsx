@@ -498,6 +498,17 @@ function CRFlag({ className = '' }) {
 
 export default function App({ vistaInicial = 'hero' } = {}) {
   const [lang, setLang] = useState('es');
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  // Enlaces desde páginas en inglés: /capsulas/?lang=en abre la sección en inglés.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('lang') === 'en') {
+      setLang('en');
+    }
+  }, []);
   const [isDark, setIsDark] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

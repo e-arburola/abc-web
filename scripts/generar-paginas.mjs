@@ -33,7 +33,7 @@ const pagina = (post, lang) => {
   const url = `${SITIO}${ruta(lang, post.id)}`;
   const titulo = post.title[lang];
   const resumen = post.summary[lang];
-  const home = '/';
+  const volverA = lang === 'es' ? '/capsulas/' : '/capsulas/?lang=en';
   const volver = lang === 'es' ? 'Volver a cápsulas' : 'Back to insights';
   const etiquetaIdioma = lang === 'es' ? 'English' : 'Español';
   const parrafos = post.content[lang]
@@ -70,7 +70,8 @@ const pagina = (post, lang) => {
     <meta property="og:url" content="${url}" />
     <meta property="og:locale" content="${lang === 'es' ? 'es_CR' : 'en_US'}" />
     <meta name="twitter:card" content="summary" />
-    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -94,14 +95,14 @@ ${JSON.stringify(jsonld, null, 2)}
   <body>
     <div class="wrap">
       <header>
-        <a href="${home}"><img src="/logo.svg" alt="${NOMBRE}" width="1740" height="620" /></a>
+        <a href="/"><img src="/logo.svg" alt="${NOMBRE}" width="1740" height="620" /></a>
         <a href="${ruta(otro, post.id)}" hreflang="${otro === 'es' ? 'es-CR' : 'en'}">${etiquetaIdioma}</a>
       </header>
       <main>
         <div class="meta"><span>${esc(post.date[lang])}</span><span>${esc(post.readTime[lang])}</span></div>
         <h1>${esc(titulo)}</h1>
 ${parrafos}
-        <a class="volver" href="${home}">← ${volver}</a>
+        <a class="volver" href="${volverA}">← ${volver}</a>
       </main>
       <footer>
         <p>© ${new Date().getFullYear()} ${NOMBRE}. Contador Privado Incorporado, Costa Rica.</p>
