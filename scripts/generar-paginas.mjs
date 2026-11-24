@@ -72,7 +72,7 @@ const pagina = (post, lang) => {
     <meta property="og:url" content="${url}" />
     <meta property="og:locale" content="${lang === 'es' ? 'es_CR' : 'en_US'}" />
     <meta name="twitter:card" content="summary" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
     <script>
       try {
         if (localStorage.getItem('abc-tema') === 'claro') {
