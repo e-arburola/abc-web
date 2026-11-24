@@ -5,7 +5,7 @@ Sitio en React + Vite + Tailwind CSS. Se publica en Cloudflare Pages desde la ra
 ## Cambiar logo, foto o video (sin tocar el código)
 Reemplace los archivos de `public/` con los mismos nombres:
 - `public/logo.svg`: logotipo.
-- `public/perfil.jpg`: fotografía de perfil (JPG, formato vertical).
+- `public/perfil.jpg`: fotografía de perfil (JPG, cuadrada de 512 × 512 px).
 - `public/video.mp4`: video de fondo del inicio (MP4 H.264, opcional).
 
 ## Agregar una cápsula de Información
