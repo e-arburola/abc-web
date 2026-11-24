@@ -510,6 +510,25 @@ export default function App({ vistaInicial = 'hero' } = {}) {
     }
   }, []);
   const [isDark, setIsDark] = useState(true);
+
+  // El tema elegido se recuerda en este navegador, también al abrir las cápsulas.
+  const cambiarTema = (oscuro) => {
+    setIsDark(oscuro);
+    try {
+      localStorage.setItem('abc-tema', oscuro ? 'oscuro' : 'claro');
+    } catch {
+      /* el navegador puede bloquear el almacenamiento */
+    }
+  };
+
+  useEffect(() => {
+    try {
+      const guardado = localStorage.getItem('abc-tema');
+      if (guardado) setIsDark(guardado === 'oscuro');
+    } catch {
+      /* sin almacenamiento, se usa el tema oscuro */
+    }
+  }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 'hero' | 'services' | 'commitment' | 'profile' | 'contact' | 'blog'
@@ -788,7 +807,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
           <button
             type="button"
-            onClick={() => setIsDark(!isDark)}
+            onClick={() => cambiarTema(!isDark)}
             className={`inline-flex h-8 w-8 items-center justify-center rounded-lg border transition-colors ${
               activeView === 'blog' && !isDark
                 ? 'border-slate-300 bg-white text-slate-800 hover:bg-slate-100'
@@ -820,7 +839,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
           <button
             type="button"
-            onClick={() => setIsDark(!isDark)}
+            onClick={() => cambiarTema(!isDark)}
             className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-white"
             aria-label="Toggle Theme"
           >
