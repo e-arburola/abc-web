@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   X,
@@ -151,7 +151,7 @@ const COPY = {
       ],
       directEmail: 'edu.bermudez@abc.cr',
       phone: '8414-1438',
-      photoPlaceholder: 'Coloca tu fotografía en public/perfil.jpg',
+      photoPlaceholder: 'Fotografía no disponible',
     },
     info: {
       tag: 'Cápsulas y Novedades',
@@ -248,7 +248,7 @@ const COPY = {
         },
         {
           heading: '11. Cookies y almacenamiento en el navegador',
-          text: 'Este sitio no instala cookies publicitarias ni de seguimiento y no guarda datos en su navegador. Si en el futuro se activa analítica u otra herramienta que use cookies, esta sección se actualizará antes.',
+          text: 'Este sitio no instala cookies publicitarias ni de seguimiento. Solo guarda en su navegador su preferencia de tema (claro u oscuro), que no se envía a nuestros servidores. Si en el futuro se activa analítica u otra herramienta que use cookies, esta sección se actualizará antes.',
         },
         {
           heading: '12. Carácter informativo del contenido',
@@ -374,7 +374,7 @@ const COPY = {
       ],
       directEmail: 'edu.bermudez@abc.cr',
       phone: '8414-1438',
-      photoPlaceholder: 'Place your photo at public/perfil.jpg',
+      photoPlaceholder: 'Photo not available',
     },
     info: {
       tag: 'Briefings & Updates',
@@ -471,7 +471,7 @@ const COPY = {
         },
         {
           heading: '11. Cookies and browser storage',
-          text: 'This site does not install advertising or tracking cookies and does not store data in your browser. If analytics or another tool that uses cookies is enabled in the future, this section will be updated beforehand.',
+          text: 'This site does not install advertising or tracking cookies. It only stores your theme preference (light or dark) in your browser, which is not sent to our servers. If analytics or another tool that uses cookies is enabled in the future, this section will be updated beforehand.',
         },
         {
           heading: '12. Informative nature of content',
@@ -544,14 +544,15 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
   // Al cambiar de sección, el título, la descripción y el canónico cambian con ella (en español).
   useEffect(() => {
-    if (lang !== 'es') return;
     const vista = VISTAS.find((v) => v.id === activeView);
     if (!vista) return;
-    document.title = vista.titulo;
-    document.querySelector('meta[name="description"]')?.setAttribute('content', vista.descripcion);
+    const titulo = lang === 'en' ? vista.tituloEn : vista.titulo;
+    const descripcion = lang === 'en' ? vista.descripcionEn : vista.descripcion;
+    document.title = titulo;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', descripcion);
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://abc.cr${vista.ruta}`);
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', vista.titulo);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', vista.descripcion);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', titulo);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', descripcion);
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', `https://abc.cr${vista.ruta}`);
   }, [activeView, lang]);
 
@@ -563,14 +564,56 @@ export default function App({ vistaInicial = 'hero' } = {}) {
     }
   }, [activeView]);
 
+  // Escape cierra el menú móvil.
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const alPresionarEscape = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', alPresionarEscape);
+    return () => document.removeEventListener('keydown', alPresionarEscape);
+  }, [mobileMenuOpen]);
+
   // Atrás y adelante del navegador vuelven a la vista correspondiente.
   useEffect(() => {
     const alCambiarRuta = () => setActiveView(vistaDeRuta(window.location.pathname));
     window.addEventListener('popstate', alCambiarRuta);
     return () => window.removeEventListener('popstate', alCambiarRuta);
   }, []);
-  const [selectedPostId, setSelectedPostId] = useState(null);
   const [legalOpen, setLegalOpen] = useState(false);
+  const dialogoLegalRef = useRef(null);
+
+  // Modal legal: el foco entra al diálogo, Tab no sale de él, Escape lo cierra y el foco regresa al botón que lo abrió.
+  useEffect(() => {
+    if (!legalOpen) return undefined;
+    const elementoPrevio = document.activeElement;
+    const alPresionarTecla = (e) => {
+      if (e.key === 'Escape') {
+        setLegalOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !dialogoLegalRef.current) return;
+      const enfocables = dialogoLegalRef.current.querySelectorAll(
+        'button, a[href], input, textarea, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (enfocables.length === 0) return;
+      const primero = enfocables[0];
+      const ultimo = enfocables[enfocables.length - 1];
+      if (e.shiftKey && document.activeElement === primero) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primero.focus();
+      }
+    };
+    document.addEventListener('keydown', alPresionarTecla);
+    dialogoLegalRef.current?.querySelector('button')?.focus();
+    return () => {
+      document.removeEventListener('keydown', alPresionarTecla);
+      if (elementoPrevio instanceof HTMLElement) elementoPrevio.focus();
+    };
+  }, [legalOpen]);
 
   const [logoError, setLogoError] = useState(false);
   const [photoError, setPhotoError] = useState(false);
@@ -578,6 +621,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
   // Contact form state (Web3Forms)
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     email: '',
     service: '',
     message: '',
@@ -590,10 +634,6 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    if (!NEWSLETTER_ACCESS_KEY) {
-      setNewsletterFeedback({ type: 'error', text: t.contact.newsletterSoon });
-      return;
-    }
     if (!newsletterEmail.trim()) {
       setNewsletterFeedback({ type: 'error', text: t.contact.newsletterError });
       return;
@@ -650,7 +690,6 @@ export default function App({ vistaInicial = 'hero' } = {}) {
     setMobileMenuOpen(false);
     setFormFeedback(null);
     if (view !== 'blog') {
-      setSelectedPostId(null);
     }
     if (presetService) {
       setFormData((prev) => ({ ...prev, service: presetService }));
@@ -669,7 +708,9 @@ export default function App({ vistaInicial = 'hero' } = {}) {
         subject: `Consulta desde abc.cr — ${formData.service || 'General'}`,
         from_name: formData.name,
         name: formData.name,
+        phone: formData.phone,
         email: formData.email,
+        botcheck: e.currentTarget.elements.botcheck?.checked ?? false,
         service: formData.service || 'Consulta general',
         message: formData.message,
       };
@@ -683,7 +724,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
       if (data.success) {
         setFormFeedback({ type: 'success', text: t.contact.sentSuccess });
-        setFormData({ name: '', email: '', service: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', service: '', message: '' });
       } else {
         setFormFeedback({ type: 'error', text: t.contact.sentError });
       }
@@ -701,7 +742,6 @@ export default function App({ vistaInicial = 'hero' } = {}) {
     activeView === 'profile' ||
     activeView === 'contact';
 
-  const selectedPost = BLOG_POSTS.find((p) => p.id === selectedPostId) || null;
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     t.whatsappMessage
   )}`;
@@ -712,7 +752,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
         isDark
           ? 'bg-[#030712] text-white selection:bg-blue-600 selection:text-white'
           : 'bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white'
-      } ${activeView === 'hero' ? 'h-screen overflow-hidden' : 'overflow-x-hidden'}`}
+      } ${activeView === 'hero' ? 'min-h-screen' : 'overflow-x-hidden'}`}
     >
       {/* Background Video (visible on Hero & overlays, hidden on dedicated Blog page) */}
       {activeView !== 'blog' && (
@@ -737,6 +777,12 @@ export default function App({ vistaInicial = 'hero' } = {}) {
       )}
 
       {/* Navbar (z-30) */}
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white"
+      >
+        {lang === 'en' ? 'Skip to content' : 'Saltar al contenido'}
+      </a>
       <header
         className={`relative z-30 flex h-20 items-center justify-between px-6 md:px-12 lg:px-16 ${
           activeView === 'blog'
@@ -750,7 +796,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
           <button
             type="button"
             onClick={() => navigateTo('hero')}
-            className="flex items-center focus:outline-none"
+            className="flex items-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             aria-label="Accounting Bytes & Consulting — abc.cr"
           >
             {!logoError ? (
@@ -872,6 +918,8 @@ export default function App({ vistaInicial = 'hero' } = {}) {
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white active:scale-90 transition-transform"
             aria-label="Toggle Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="menu-movil"
           >
             <Menu
               size={20}
@@ -889,17 +937,13 @@ export default function App({ vistaInicial = 'hero' } = {}) {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay (z-20) */}
+      {/* Mobile Menu Overlay (z-20): se renderiza solo cuando está abierto, para que sus botones no reciban foco cerrado */}
+      {mobileMenuOpen && (
       <div
-        className={`fixed inset-x-0 top-0 z-20 bg-[#030712]/98 backdrop-blur-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden overflow-hidden ${
-          mobileMenuOpen ? 'h-screen opacity-100' : 'h-0 opacity-0 pointer-events-none'
-        }`}
+        id="menu-movil"
+        className="fixed inset-x-0 top-0 z-20 h-screen bg-[#030712]/98 backdrop-blur-xl md:hidden"
       >
-        <div
-          className={`flex h-full flex-col justify-center gap-5 px-8 transition-all duration-500 delay-100 ${
-            mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
+        <div className="flex h-full flex-col justify-center gap-5 px-8">
           {[
             { id: 'hero', label: t.nav.home },
             { id: 'services', label: t.nav.services },
@@ -927,10 +971,11 @@ export default function App({ vistaInicial = 'hero' } = {}) {
           </button>
         </div>
       </div>
+      )}
 
       {/* HERO VIEW (Single 100vh viewport) */}
       {activeView === 'hero' && (
-        <main className="relative z-10 flex h-[calc(100vh-80px)] flex-col justify-between px-6 pb-8 pt-8 sm:pb-12 sm:pt-12 md:px-12 md:pb-14 md:pt-16 lg:px-16">
+        <main id="contenido" className="relative z-10 flex min-h-[calc(100vh-80px)] flex-col justify-between px-6 pb-8 pt-8 sm:pb-12 sm:pt-12 md:px-12 md:pb-14 md:pt-16 lg:px-16">
           <div className="max-w-3xl">
             <p className="mb-3 sm:mb-4 text-xs sm:text-sm font-medium text-blue-300/95 animate-[fadeSlideUp_0.8s_ease_0.2s_both]">
               {t.hero.badge}
@@ -1004,7 +1049,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
       {/* OVERLAY PANELS (Services, Commitment, Profile, Contact) */}
       {isOverlayOpen && (
-        <div className="fixed inset-0 z-10 overflow-y-auto pt-24 pb-24 px-6 md:px-12 lg:px-16">
+        <div id="contenido" className="fixed inset-0 z-10 overflow-y-auto pt-24 pb-24 px-6 md:px-12 lg:px-16">
           <div className="mx-auto max-w-5xl">
             <div
               className={`rounded-2xl border p-6 sm:p-10 backdrop-blur-xl shadow-2xl transition-colors ${
@@ -1363,6 +1408,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                         <div className="flex flex-col sm:flex-row gap-2">
                         <input
                           type="email"
+                          aria-label={t.contact.emailLabel}
                           value={newsletterEmail}
                           onChange={(e) => setNewsletterEmail(e.target.value)}
                           placeholder={t.contact.newsletterPlaceholder}
@@ -1384,6 +1430,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
                       {newsletterFeedback && (
                         <p
+                          role={newsletterFeedback.type === 'success' ? 'status' : 'alert'}
                           className={`mt-2 text-xs ${
                             newsletterFeedback.type === 'success'
                               ? 'text-emerald-400'
@@ -1408,12 +1455,14 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                   {/* Main Contact Form */}
                   <form onSubmit={handleContactSubmit} className="space-y-4">
                     <div>
-                      <label className="mb-1 block text-xs font-medium text-blue-400">
+                      <label htmlFor="contact-name" className="mb-1 block text-xs font-medium text-blue-400">
                         {t.contact.nameLabel}
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         required
+                        autoComplete="name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder={t.contact.namePlaceholder}
@@ -1426,12 +1475,33 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                     </div>
 
                     <div>
-                      <label className="mb-1 block text-xs font-medium text-blue-400">
+                      <label htmlFor="contact-phone" className="mb-1 block text-xs font-medium text-blue-400">
+                        {t.contact.phoneLabel}
+                      </label>
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        required
+                        autoComplete="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="8888-8888"
+                        className={`w-full rounded-lg border px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none ${
+                          isDark
+                            ? 'border-white/15 bg-[#030712] text-white'
+                            : 'border-slate-300 bg-slate-50 text-slate-900'
+                        }`}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="contact-email" className="mb-1 block text-xs font-medium text-blue-400">
                         {t.contact.emailLabel}
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
-                        required
+                        autoComplete="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder={t.contact.emailPlaceholder}
@@ -1444,10 +1514,11 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                     </div>
 
                     <div>
-                      <label className="mb-1 block text-xs font-medium text-blue-400">
+                      <label htmlFor="contact-service" className="mb-1 block text-xs font-medium text-blue-400">
                         {t.contact.serviceLabel}
                       </label>
                       <input
+                        id="contact-service"
                         type="text"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -1461,12 +1532,12 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                     </div>
 
                     <div>
-                      <label className="mb-1 block text-xs font-medium text-blue-400">
+                      <label htmlFor="contact-message" className="mb-1 block text-xs font-medium text-blue-400">
                         {t.contact.messageLabel}
                       </label>
                       <textarea
+                        id="contact-message"
                         rows={4}
-                        required
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder={t.contact.messagePlaceholder}
@@ -1476,6 +1547,13 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                             : 'border-slate-300 bg-slate-50 text-slate-900'
                         }`}
                       />
+                    </div>
+
+                    <div className="sr-only" aria-hidden="true">
+                      <label>
+                        No marcar
+                        <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" />
+                      </label>
                     </div>
 
                     <label className="flex items-start gap-2 text-xs sm:text-sm leading-relaxed">
@@ -1494,6 +1572,8 @@ export default function App({ vistaInicial = 'hero' } = {}) {
 
                     {formFeedback && (
                       <div
+                        role={formFeedback.type === 'success' ? 'status' : 'alert'}
+                        aria-live="polite"
                         className={`flex items-center gap-2 rounded-lg border p-3 text-xs sm:text-sm ${
                           formFeedback.type === 'success'
                             ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
@@ -1515,6 +1595,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
       {/* DEDICATED BLOG / INFORMATION PAGE */}
       {activeView === 'blog' && (
         <main
+          id="contenido"
           className={`min-h-[calc(100vh-80px)] px-6 py-12 md:px-12 lg:px-16 ${
             isDark ? 'bg-[#030712] text-white' : 'bg-slate-50 text-slate-900'
           }`}
@@ -1551,7 +1632,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
               </button>
             </div>
 
-            {!selectedPost ? (
+            {(
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {BLOG_POSTS.map((post) => (
                   <article
@@ -1594,59 +1675,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                   </article>
                 ))}
               </div>
-            ) : (
-              <article
-                className={`rounded-2xl border p-6 sm:p-10 ${
-                  isDark ? 'border-blue-500/20 bg-[#070e21]' : 'border-slate-200 bg-white'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setSelectedPostId(null)}
-                  className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-blue-500 hover:underline"
-                >
-                  <ArrowLeft size={15} />
-                  <span>{t.info.backToList}</span>
-                </button>
-
-                <div className="flex flex-wrap items-center gap-4 text-xs text-blue-400">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Calendar size={14} />
-                    {selectedPost.date[lang]}
-                  </span>
-                  <span>•</span>
-                  <span>{selectedPost.readTime[lang]}</span>
-                </div>
-
-                <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight">
-                  {selectedPost.title[lang]}
-                </h2>
-
-                <div className="mt-6 space-y-4">
-                  {selectedPost.content[lang].map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className={`text-sm sm:text-base leading-relaxed ${
-                        isDark ? 'text-slate-300' : 'text-slate-700'
-                      }`}
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="mt-8 border-t border-current/10 pt-6">
-                  <button
-                    type="button"
-                    onClick={() => navigateTo('contact', selectedPost.title[lang])}
-                    className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-500 transition-colors"
-                  >
-                    <span>{t.info.consultTopic}</span>
-                    <ArrowRight size={15} />
-                  </button>
-                </div>
-              </article>
-            )}
+)}
           </div>
         </main>
       )}
@@ -1655,6 +1684,10 @@ export default function App({ vistaInicial = 'hero' } = {}) {
       {legalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
           <div
+            ref={dialogoLegalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-legal"
             className={`max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border p-6 sm:p-8 ${
               isDark
                 ? 'border-blue-500/25 bg-[#050b1c] text-white'
@@ -1663,7 +1696,7 @@ export default function App({ vistaInicial = 'hero' } = {}) {
           >
             <div className="flex items-start justify-between gap-4 border-b border-current/10 pb-4">
               <div>
-                <h2 className="text-xl sm:text-2xl font-semibold">{t.legal.title}</h2>
+                <h2 id="titulo-legal" className="text-xl sm:text-2xl font-semibold">{t.legal.title}</h2>
                 <p className="mt-1 text-xs text-blue-400">{t.legal.subtitle}</p>
               </div>
               <button

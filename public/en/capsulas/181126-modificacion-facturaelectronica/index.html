@@ -61,7 +61,12 @@
       .meta { display: flex; gap: 1rem; font-size: .875rem; color: #93c5fd; margin-top: 2rem; }
       h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; letter-spacing: -.01em; margin: .75rem 0 1.5rem; font-weight: 600; }
       p { margin: 0 0 1.1rem; font-size: 1.0625rem; color: #cbd5e1; }
-      .volver { display: inline-block; margin-top: 2.5rem; font-weight: 500; }
+      .volver { display: inline-block; font-weight: 500; }
+      .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2.5rem; }
+      .boton { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: .5rem; background: #2563eb; color: #fff; font-weight: 500; text-decoration: none; }
+      .boton:hover { background: #1d4ed8; }
+      .aviso { margin-top: 2rem; font-size: .875rem; color: #94a3b8; }
+      html:not(.dark) .aviso { color: #475569; }
       html:not(.dark) body { background: #f8fafc; color: #0f172a; }
       html:not(.dark) header { border-bottom-color: rgba(37,99,235,.25); }
       html:not(.dark) p { color: #334155; }
@@ -83,12 +88,16 @@
         <div class="meta"><span>November 18, 2026</span><span>4 min read</span></div>
         <h1>New Reference Codes in Electronic Invoicing (Version 4.4)</h1>
         <p>Since November 1, 2026, electronic vouchers must use the new reference codes of the Electronic Voucher Annexes and Structures, version 4.4, issued by the Ministry of Finance. Codes 13, 14, and 15 were added to reflect accounting effects in the corresponding period. Code 16 replaces a rejected voucher and code 19 refers to the Electronic Export Invoice. Codes 01 and 07 remain in use.</p>
-        <p>How corrections work (confirmed in the technical regulation): a valid electronic voucher cannot be cancelled directly. Every correction is made with an electronic credit or debit note that identifies the invoice it modifies. Code 13 cancels the reference document for a material error, code 14 corrects the amount, and code 15 replaces the voucher.</p>
-        <p>Invoices from prior months (confirmed in Annex 1): the reference date for code 13 must be the fiscal period in which the income from the original invoice was received. The effect is therefore recorded in the period of the original invoice, not in the month the error is found. Example (from sector sources): a May invoice issued with a wrong amount is cancelled with code 13 and a new one is issued with code 15.</p>
-        <p>Invoices from prior years and returns already filed (not confirmed): the official documents reviewed do not state whether an already-filed return must be rectified, or how income tax is affected by a correction from another year. Sector sources indicate that the correction may require reviewing the return for the original period and, if the adjustment increases the tax, paying the difference plus interest. Consult your accountant before correcting.</p>
-        <p>Recommendations: confirm with your e-invoicing provider that the system includes version 4.4 and allows the new codes. Review your period closings before correcting vouchers from earlier months. Sector sources also indicate that the system must accept alphanumeric legal-entity IDs; this point was not verified in the official document.</p>
-        <p>Official sources: Ministry of Finance, Update to the Electronic Voucher Annexes and Structures, version 4.4: https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf | Technical Provisions for Electronic Vouchers (article 9 and Annex 1): https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf</p>
-        <a class="volver" href="/capsulas/?lang=en">← Back to insights</a>
+        <p>How corrections work (according to the Hacienda technical regulation): a valid electronic voucher cannot be cancelled directly. Every correction is made with an electronic credit or debit note that identifies the invoice it modifies. Code 13 cancels the reference document for a material error, code 14 corrects the amount, and code 15 replaces the voucher.</p>
+        <p>Invoices from prior months (according to Annex 1 of the technical regulation): the reference date for code 13 must be the fiscal period in which the income from the original invoice was received. The effect is therefore recorded in the period of the original invoice, not in the month the error is found. Example (from sector sources): a May invoice with an error in the amount is cancelled with code 13 through a credit note, and a new invoice with the correct amount is issued.</p>
+        <p>Invoices from prior years and returns already filed (pending confirmation from an official source): the official documents reviewed do not state whether an already-filed return must be rectified, or how income tax is affected by a correction from another year. Other sector sources indicate that the correction may require reviewing the return for the original period and, if the adjustment increases the tax, paying the difference plus interest. Consult your accountant before correcting.</p>
+        <p>Recommendations: confirm with your e-invoicing provider that the system includes version 4.4 and allows the new codes. Review your period closings before correcting vouchers from earlier months. Other sector sources also indicate that the system must accept alphanumeric legal-entity IDs; this point does not yet appear in the official document.</p>
+        <p>Official sources: Ministry of Finance, Update to the Electronic Voucher Annexes and Structures, version 4.4: <a href="https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf" target="_blank" rel="noopener noreferrer">https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf</a> | Technical Provisions for Electronic Vouchers (article 9 and Annex 1): <a href="https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf" target="_blank" rel="noopener noreferrer">https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf</a></p>
+        <p class="aviso">This information is for general guidance only and does not replace personalized advice.</p>
+        <div class="acciones">
+          <a class="boton" href="/contacto/?lang=en">Request information</a>
+          <a class="volver" href="/capsulas/?lang=en">← Back to insights</a>
+        </div>
       </main>
       <footer>
         <p>© 2026 Accounting Bytes & Consulting. Contador Privado Incorporado, Costa Rica.</p>

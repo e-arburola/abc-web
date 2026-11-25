@@ -61,7 +61,12 @@
       .meta { display: flex; gap: 1rem; font-size: .875rem; color: #93c5fd; margin-top: 2rem; }
       h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; letter-spacing: -.01em; margin: .75rem 0 1.5rem; font-weight: 600; }
       p { margin: 0 0 1.1rem; font-size: 1.0625rem; color: #cbd5e1; }
-      .volver { display: inline-block; margin-top: 2.5rem; font-weight: 500; }
+      .volver { display: inline-block; font-weight: 500; }
+      .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2.5rem; }
+      .boton { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: .5rem; background: #2563eb; color: #fff; font-weight: 500; text-decoration: none; }
+      .boton:hover { background: #1d4ed8; }
+      .aviso { margin-top: 2rem; font-size: .875rem; color: #94a3b8; }
+      html:not(.dark) .aviso { color: #475569; }
       html:not(.dark) body { background: #f8fafc; color: #0f172a; }
       html:not(.dark) header { border-bottom-color: rgba(37,99,235,.25); }
       html:not(.dark) p { color: #334155; }
@@ -83,12 +88,16 @@
         <div class="meta"><span>18 de noviembre de 2026</span><span>4 min de lectura</span></div>
         <h1>Nuevos códigos de referencia en Factura Electrónica (versión 4.4)</h1>
         <p>A partir del 1 de noviembre de 2026, los comprobantes electrónicos deben usar los nuevos códigos de referencia de los Anexos y Estructuras de comprobantes electrónicos versión 4.4 del Ministerio de Hacienda. Los códigos 13, 14 y 15 se agregaron para reflejar los efectos contables en el período que corresponda. El 16 se usa para sustituir un comprobante rechazado y el 19 para la Factura Electrónica de Exportación. Los códigos 01 y 07 se mantienen.</p>
-        <p>Cómo se corrige (confirmado en la normativa técnica): un comprobante electrónico válido no se anula directamente. Toda corrección se hace con una nota de crédito o débito electrónica que identifique la factura que modifica. El código 13 anula el documento de referencia por error material, el 14 corrige el monto y el 15 sustituye el comprobante.</p>
-        <p>Facturas de meses anteriores (confirmado en el Anexo 1): la fecha de referencia del código 13 debe corresponder al período fiscal en que se recibió el ingreso de la factura original. Es decir, el efecto se registra en el período de la factura original, no en el mes en que se detecta el error. Ejemplo (de fuentes del sector): una factura de mayo con monto errado se anula con el código 13 y se emite una nueva con el código 15.</p>
-        <p>Facturas de años anteriores y declaraciones ya presentadas (no confirmado): los documentos oficiales revisados no indican si debe rectificarse una declaración ya presentada, ni cómo afecta el impuesto sobre la renta una corrección de otro año. Fuentes del sector indican que la corrección puede obligar a revisar la declaración del período original y, si el ajuste aumenta el impuesto, pagar la diferencia con intereses. Antes de corregir, consulte con su contador.</p>
-        <p>Recomendaciones: confirme con su proveedor de facturación electrónica que el sistema incluye la versión 4.4 y permite usar los nuevos códigos. Revise sus cierres de período antes de corregir comprobantes de meses anteriores. Fuentes del sector indican además que el sistema debe aceptar cédulas jurídicas alfanuméricas; este punto no se verificó en el documento oficial.</p>
-        <p>Fuentes oficiales: Ministerio de Hacienda, Comunica Actualización de los Anexos y Estructuras versión 4.4: https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf | Disposiciones técnicas de comprobantes electrónicos (artículo 9 y Anexo 1): https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf</p>
-        <a class="volver" href="/capsulas/">← Volver a cápsulas</a>
+        <p>Cómo se corrige (según la normativa técnica de Hacienda): un comprobante electrónico válido no se anula directamente. Toda corrección se hace con una nota de crédito o débito electrónica que identifique la factura que modifica. El código 13 anula el documento de referencia por error material, el 14 corrige el monto y el 15 sustituye el comprobante.</p>
+        <p>Facturas de meses anteriores (según el Anexo 1 de la normativa técnica): la fecha de referencia del código 13 debe corresponder al período fiscal en que se recibió el ingreso de la factura original. Es decir, el efecto se registra en el período de la factura original, no en el mes en que se detecta el error. Ejemplo (de fuentes del sector): una factura de mayo con un error en el monto se anula con el código 13 mediante nota de crédito, y se emite una nueva factura con el monto correcto.</p>
+        <p>Facturas de años anteriores y declaraciones ya presentadas (pendiente de confirmar en fuente oficial): los documentos oficiales revisados no indican si debe rectificarse una declaración ya presentada, ni cómo afecta el impuesto sobre la renta una corrección de otro año. Otras fuentes del sector indican que la corrección puede obligar a revisar la declaración del período original y, si el ajuste aumenta el impuesto, pagar la diferencia con intereses. Antes de corregir, consulte con su contador.</p>
+        <p>Recomendaciones: confirme con su proveedor de facturación electrónica que el sistema incluye la versión 4.4 y permite usar los nuevos códigos. Revise sus cierres de período antes de corregir comprobantes de meses anteriores. Otras fuentes del sector indican además que el sistema debe aceptar cédulas jurídicas alfanuméricas; este punto aún no aparece en el documento oficial.</p>
+        <p>Fuentes oficiales: Ministerio de Hacienda, Comunica Actualización de los Anexos y Estructuras versión 4.4: <a href="https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf" target="_blank" rel="noopener noreferrer">https://www.hacienda.go.cr/docs/ActualizacionAnexosyEstructurasVersion4.4CEv2.pdf</a> | Disposiciones técnicas de comprobantes electrónicos (artículo 9 y Anexo 1): <a href="https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf" target="_blank" rel="noopener noreferrer">https://www.hacienda.go.cr/docs/DGT-R-000-2024DisposicionesTecnicasDeComprobantesElectronicosCP.pdf</a></p>
+        <p class="aviso">Esta información es de carácter general y no sustituye una asesoría personalizada.</p>
+        <div class="acciones">
+          <a class="boton" href="/contacto/">Solicitar información</a>
+          <a class="volver" href="/capsulas/">← Volver a cápsulas</a>
+        </div>
       </main>
       <footer>
         <p>© 2026 Accounting Bytes & Consulting. Contador Privado Incorporado, Costa Rica.</p>

@@ -48,9 +48,21 @@ const pagina = (post, lang) => {
   const volverA = lang === 'es' ? '/capsulas/' : '/capsulas/?lang=en';
   const volver = lang === 'es' ? 'Volver a cápsulas' : 'Back to insights';
   const etiquetaIdioma = lang === 'es' ? 'English' : 'Español';
+  // Las URLs del texto se muestran como enlaces.
+  const conEnlaces = (texto) =>
+    esc(texto).replace(
+      /https?:\/\/[^\s|]+/g,
+      (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`,
+    );
   const parrafos = post.content[lang]
-    .map((p) => `        <p>${esc(p)}</p>`)
+    .map((p) => `        <p>${conEnlaces(p)}</p>`)
     .join('\n');
+  const consultaTexto = lang === 'es' ? 'Solicitar información' : 'Request information';
+  const consultaHref = lang === 'es' ? '/contacto/' : '/contacto/?lang=en';
+  const avisoTexto =
+    lang === 'es'
+      ? 'Esta información es de carácter general y no sustituye una asesoría personalizada.'
+      : 'This information is for general guidance only and does not replace personalized advice.';
   const jsonld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -107,7 +119,12 @@ ${JSON.stringify(jsonld, null, 2)}
       .meta { display: flex; gap: 1rem; font-size: .875rem; color: #93c5fd; margin-top: 2rem; }
       h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; letter-spacing: -.01em; margin: .75rem 0 1.5rem; font-weight: 600; }
       p { margin: 0 0 1.1rem; font-size: 1.0625rem; color: #cbd5e1; }
-      .volver { display: inline-block; margin-top: 2.5rem; font-weight: 500; }
+      .volver { display: inline-block; font-weight: 500; }
+      .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2.5rem; }
+      .boton { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: .5rem; background: #2563eb; color: #fff; font-weight: 500; text-decoration: none; }
+      .boton:hover { background: #1d4ed8; }
+      .aviso { margin-top: 2rem; font-size: .875rem; color: #94a3b8; }
+      html:not(.dark) .aviso { color: #475569; }
       html:not(.dark) body { background: #f8fafc; color: #0f172a; }
       html:not(.dark) header { border-bottom-color: rgba(37,99,235,.25); }
       html:not(.dark) p { color: #334155; }
@@ -129,7 +146,11 @@ ${JSON.stringify(jsonld, null, 2)}
         <div class="meta"><span>${esc(post.date[lang])}</span><span>${esc(post.readTime[lang])}</span></div>
         <h1>${esc(titulo)}</h1>
 ${parrafos}
-        <a class="volver" href="${volverA}">← ${volver}</a>
+        <p class="aviso">${avisoTexto}</p>
+        <div class="acciones">
+          <a class="boton" href="${consultaHref}">${consultaTexto}</a>
+          <a class="volver" href="${volverA}">← ${volver}</a>
+        </div>
       </main>
       <footer>
         <p>© ${new Date().getFullYear()} ${NOMBRE}. Contador Privado Incorporado, Costa Rica.</p>

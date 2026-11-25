@@ -61,7 +61,12 @@
       .meta { display: flex; gap: 1rem; font-size: .875rem; color: #93c5fd; margin-top: 2rem; }
       h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.25; letter-spacing: -.01em; margin: .75rem 0 1.5rem; font-weight: 600; }
       p { margin: 0 0 1.1rem; font-size: 1.0625rem; color: #cbd5e1; }
-      .volver { display: inline-block; margin-top: 2.5rem; font-weight: 500; }
+      .volver { display: inline-block; font-weight: 500; }
+      .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2.5rem; }
+      .boton { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.25rem; border-radius: .5rem; background: #2563eb; color: #fff; font-weight: 500; text-decoration: none; }
+      .boton:hover { background: #1d4ed8; }
+      .aviso { margin-top: 2rem; font-size: .875rem; color: #94a3b8; }
+      html:not(.dark) .aviso { color: #475569; }
       html:not(.dark) body { background: #f8fafc; color: #0f172a; }
       html:not(.dark) header { border-bottom-color: rgba(37,99,235,.25); }
       html:not(.dark) p { color: #334155; }
@@ -88,7 +93,11 @@
         <p>Plazo: para las operaciones de 2026 se presenta una sola declaración consolidada, a más tardar dentro de los primeros 25 días naturales de enero de 2027. Esta opción de presentación única aplica solo al periodo 2026. A partir de 2027, la declaración se presenta mensualmente, dentro de los primeros 25 días naturales del mes siguiente al periodo informado.</p>
         <p>Multas: omitir información, presentarla tarde o con datos incorrectos puede generar sanciones según el Código de Normas y Procedimientos Tributarios, desde tres salarios base (¢1.386.600) hasta cien salarios base (¢46.220.000), según los montos vigentes en 2026.</p>
         <p>Orden documental recomendado: identifique las operaciones con anticipación, separe los comprobantes electrónicos de las operaciones sin comprobante, y conserve organizada la documentación de respaldo de cada pago y cada retención. Revise el registro cada mes para no acumular operaciones pendientes.</p>
-        <a class="volver" href="/capsulas/">← Volver a cápsulas</a>
+        <p class="aviso">Esta información es de carácter general y no sustituye una asesoría personalizada.</p>
+        <div class="acciones">
+          <a class="boton" href="/contacto/">Solicitar información</a>
+          <a class="volver" href="/capsulas/">← Volver a cápsulas</a>
+        </div>
       </main>
       <footer>
         <p>© 2026 Accounting Bytes & Consulting. Contador Privado Incorporado, Costa Rica.</p>
