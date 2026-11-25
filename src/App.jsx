@@ -26,7 +26,13 @@ import {
   Landmark,
   ShieldAlert,
   BellPlus,
+  Youtube,
+  Facebook,
+  Instagram,
 } from 'lucide-react';
+import { REDES } from './redes.js';
+
+const ICONOS_REDES = { youtube: Youtube, facebook: Facebook, instagram: Instagram };
 
 import { BLOG_POSTS } from './capsulas.js';
 import { VISTAS, rutaDeVista, vistaDeRuta } from './rutas.js';
@@ -163,6 +169,7 @@ const COPY = {
       subtitle:
         'Escríbanos para consultas sobre contabilidad, declaraciones tributarias o acompañamiento para su negocio.',
       hoursLabel: 'Horario de atención',
+      socialTitle: 'Redes sociales',
       hoursValue: 'Lunes a Viernes de 9:00 a. m. a 4:30 p. m.',
       emailsTitle: 'Correos de atención',
       emailContact: 'contacto@abc.cr',
@@ -385,6 +392,7 @@ const COPY = {
       subtitle:
         'Reach out with questions regarding accounting, tax filings, or support for your business.',
       hoursLabel: 'Business hours',
+      socialTitle: 'Social media',
       hoursValue: 'Monday to Friday, 9:00 AM – 4:30 PM',
       emailsTitle: 'Contact emails',
       emailContact: 'contacto@abc.cr',
@@ -1279,6 +1287,32 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                           <p className="text-xs text-blue-400">{t.contact.phoneLabel}</p>
                           <p className="font-medium inline-flex items-center gap-2"><CRFlag />+506 {t.profile.phone}</p>
                         </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-blue-400">{t.contact.socialTitle}</p>
+                      <div className="mt-2 flex flex-wrap gap-3">
+                        {REDES.map((red) => {
+                          const Icono = ICONOS_REDES[red.icono];
+                          return (
+                            <a
+                              key={red.nombre}
+                              href={red.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={red.nombre}
+                              title={red.nombre}
+                              className={`flex h-11 w-11 items-center justify-center rounded-lg border text-blue-500 transition-colors ${
+                                isDark
+                                  ? 'border-blue-500/25 hover:bg-blue-500/10'
+                                  : 'border-slate-300 hover:bg-slate-100'
+                              }`}
+                            >
+                              <Icono size={20} />
+                            </a>
+                          );
+                        })}
                       </div>
                     </div>
 
