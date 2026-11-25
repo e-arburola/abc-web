@@ -979,6 +979,25 @@ export default function App({ vistaInicial = 'hero' } = {}) {
                 {t.hero.legalLink}
               </button>
             </div>
+
+            <nav className="mt-4 flex items-center gap-3" aria-label={t.contact.socialTitle}>
+              {REDES.map((red) => {
+                const Icono = ICONOS_REDES[red.icono];
+                return (
+                  <a
+                    key={red.nombre}
+                    href={red.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={red.nombre}
+                    title={red.nombre}
+                    className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    <Icono size={20} />
+                  </a>
+                );
+              })}
+            </nav>
           </div>
         </main>
       )}
