@@ -7,6 +7,16 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BLOG_POSTS } from '../src/capsulas.js';
 import { VISTAS } from '../src/rutas.js';
+import { REDES } from '../src/redes.js';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { Youtube, Facebook, Instagram } from 'lucide-react';
+
+const ICONOS_REDES = { youtube: Youtube, facebook: Facebook, instagram: Instagram };
+const redesHTML = REDES.map(
+  (red) =>
+    `<a href="${red.url}" target="_blank" rel="noopener noreferrer" aria-label="${red.nombre}" title="${red.nombre}">${renderToStaticMarkup(createElement(ICONOS_REDES[red.icono], { size: 20 }))}</a>`,
+).join('');
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 const pub = join(raiz, 'public');
@@ -103,6 +113,9 @@ ${JSON.stringify(jsonld, null, 2)}
       html:not(.dark) p { color: #334155; }
       html:not(.dark) .meta { color: #1d4ed8; }
       html:not(.dark) footer { color: #475569; border-top-color: rgba(37,99,235,.25); }
+      .redes { display: flex; gap: .75rem; margin-top: 1rem; }
+      .redes a { display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border: 1px solid rgba(96,165,250,.3); border-radius: .5rem; color: #60a5fa; }
+      html:not(.dark) .redes a { border-color: rgba(37,99,235,.35); color: #2563eb; }
       footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(59,130,246,.2); font-size: .875rem; color: #94a3b8; }
     </style>
   </head>
@@ -120,6 +133,7 @@ ${parrafos}
       </main>
       <footer>
         <p>© ${new Date().getFullYear()} ${NOMBRE}. Contador Privado Incorporado, Costa Rica.</p>
+        <nav class="redes" aria-label="Redes sociales">${redesHTML}</nav>
       </footer>
     </div>
   </body>
